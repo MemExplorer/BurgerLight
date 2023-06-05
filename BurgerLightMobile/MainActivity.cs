@@ -3,22 +3,22 @@ using Android.App;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
+using Android.Widget;
 using AndroidX.AppCompat.App;
-using AndroidX.AppCompat.Widget;
 using AndroidX.Core.View;
 using AndroidX.DrawerLayout.Widget;
-using AndroidX.Fragment.App;
 using BurgerLightMobile.Fragments;
-using Google.Android.Material.FloatingActionButton;
 using Google.Android.Material.Navigation;
-using Google.Android.Material.Snackbar;
 using Fragment = AndroidX.Fragment.App.Fragment;
+using Toolbar = AndroidX.AppCompat.Widget.Toolbar;
 
 namespace BurgerLightMobile
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
     public class MainActivity : AppCompatActivity, NavigationView.IOnNavigationItemSelectedListener
     {
+        private Button LogoutBtn;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -35,6 +35,14 @@ namespace BurgerLightMobile
             NavigationView navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
             navigationView.SetNavigationItemSelectedListener(this);
             SetContentFrame(Resource.Id.nav_home);
+
+            LogoutBtn = FindViewById<Button>(Resource.Id.logoutBtn);
+            LogoutBtn.Click += LogoutBtn_Click;
+        }
+
+        private void LogoutBtn_Click(object sender, EventArgs e)
+        {
+            //do logout function
         }
 
         public override void OnBackPressed()
