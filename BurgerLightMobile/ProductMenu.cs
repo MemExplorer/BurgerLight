@@ -33,7 +33,8 @@ namespace BurgerLightMobile
             // Use this to return your custom view for this Fragment
             View view = inflater.Inflate(Resource.Layout.ProductMenuLayout, container, false);
 
-            // Create your fragment here
+            //Populate mProductList here for RecyclerView
+            //ProductList has temporary built in products
             mProductList = new ProductList();
 
             // Instantiate the adapter and pass in its data source:
@@ -46,7 +47,7 @@ namespace BurgerLightMobile
             mRecyclerView.SetAdapter(mAdapter);
 
             mLayoutManager = new LinearLayoutManager(view.Context);
-            //mLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.Vertical, false);
+            //mLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.Vertical, false); //uncomment for gridlayout (muliple in 1 row)
             mRecyclerView.SetLayoutManager(mLayoutManager);
 
             return view;

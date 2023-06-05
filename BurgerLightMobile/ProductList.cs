@@ -42,7 +42,7 @@ namespace BurgerLightMobile
         {
             mProducts = new List<Product>();
 
-            //Built it products (testing)
+            //Built it products (testing) To be removed
             Product p1 = new Product(Resource.Drawable.burger, "Burger1");
             Product p2 = new Product(Resource.Drawable.burger, "Burger2");
             Product p3 = new Product(Resource.Drawable.burger, "Burger3");
@@ -53,8 +53,6 @@ namespace BurgerLightMobile
             mProducts.Add(p3);
             mProducts.Add(p4);
             mProducts.Add(p5);
-
-            //mProducts = mBuiltInProduct;
 
         }
 
