@@ -7,9 +7,12 @@ using AndroidX.AppCompat.App;
 using AndroidX.AppCompat.Widget;
 using AndroidX.Core.View;
 using AndroidX.DrawerLayout.Widget;
+using AndroidX.Fragment.App;
+using BurgerLightMobile.Fragments;
 using Google.Android.Material.FloatingActionButton;
 using Google.Android.Material.Navigation;
 using Google.Android.Material.Snackbar;
+using Fragment = AndroidX.Fragment.App.Fragment;
 
 namespace BurgerLightMobile
 {
@@ -24,9 +27,6 @@ namespace BurgerLightMobile
             Toolbar toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
             SetSupportActionBar(toolbar);
 
-            FloatingActionButton fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
-            fab.Click += FabOnClick;
-
             DrawerLayout drawer = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
             ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, Resource.String.navigation_drawer_open, Resource.String.navigation_drawer_close);
             drawer.AddDrawerListener(toggle);
@@ -34,6 +34,7 @@ namespace BurgerLightMobile
 
             NavigationView navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
             navigationView.SetNavigationItemSelectedListener(this);
+            SetContentFrame(Resource.Id.nav_home);
         }
 
         public override void OnBackPressed()
@@ -66,42 +67,31 @@ namespace BurgerLightMobile
             return base.OnOptionsItemSelected(item);
         }
 
-        private void FabOnClick(object sender, EventArgs eventArgs)
+        private void SetContentFrame(int id)
         {
-            View view = (View) sender;
-            Snackbar.Make(view, "Replace with your own action", Snackbar.LengthLong)
-                .SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();
+            Fragment f = null;
+
+            switch(id) {
+                case Resource.Id.nav_home:
+                    f = new HomeFragment();
+                    break;
+                case Resource.Id.nav_menu:
+                    f = new MenuFragment();
+                    break;
+                case Resource.Id.nav_orders:
+                    f = new OrdersFragment();
+                    break;
+                default:
+                    throw new NotSupportedException();
+            }
+
+            SupportFragmentManager.BeginTransaction().Replace(Resource.Id.content_frame, f).Commit();
         }
 
         public bool OnNavigationItemSelected(IMenuItem item)
         {
             int id = item.ItemId;
-
-            if (id == Resource.Id.nav_camera)
-            {
-                // Handle the camera action
-            }
-            else if (id == Resource.Id.nav_gallery)
-            {
-
-            }
-            else if (id == Resource.Id.nav_slideshow)
-            {
-
-            }
-            else if (id == Resource.Id.nav_manage)
-            {
-
-            }
-            else if (id == Resource.Id.nav_share)
-            {
-
-            }
-            else if (id == Resource.Id.nav_send)
-            {
-
-            }
-
+            SetContentFrame(id);
             DrawerLayout drawer = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
             drawer.CloseDrawer(GravityCompat.Start);
             return true;
