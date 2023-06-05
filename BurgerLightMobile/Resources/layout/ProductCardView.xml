@@ -72,9 +72,9 @@
                 android:layout_column="2"
                 android:layout_row="1"
                 android:layout_marginLeft="0.0dp"
-                android:textSize="10dp"
+                android:textSize="9dp"
                 android:layout_marginRight="17.7dp"
-                android:layout_width="250px"
+                android:layout_width="220px"
                 android:layout_height="150px" 
                 
                 />
