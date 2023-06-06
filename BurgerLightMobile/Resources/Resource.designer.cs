@@ -3416,16 +3416,19 @@ namespace BurgerLightMobile
 			public const int power = 2131165322;
 			
 			// aapt resource value: 0x7F07008B
-			public const int shopping_cart = 2131165323;
+			public const int round_cart_btn = 2131165323;
 			
 			// aapt resource value: 0x7F07008C
-			public const int side_nav_bar = 2131165324;
+			public const int shopping_cart = 2131165324;
 			
 			// aapt resource value: 0x7F07008D
-			public const int tooltip_frame_dark = 2131165325;
+			public const int side_nav_bar = 2131165325;
 			
 			// aapt resource value: 0x7F07008E
-			public const int tooltip_frame_light = 2131165326;
+			public const int tooltip_frame_dark = 2131165326;
+			
+			// aapt resource value: 0x7F07008F
+			public const int tooltip_frame_light = 2131165327;
 			
 			static Drawable()
 			{
