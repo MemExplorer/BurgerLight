@@ -50,7 +50,10 @@ namespace BurgerLightMobile.Activities
 
             //logout user if user pressed back btn
             if (loggedIn)
+            {
+                loggedIn = false;
                 BurgerLightAPI.LogoutUser(out _);
+            }
         }
 
         private void BackBtn_Click(object sender, EventArgs e)
@@ -82,7 +85,7 @@ namespace BurgerLightMobile.Activities
             {
                 //start main app
                 usernameText.Text = string.Empty;
-                loginBtn.Text = string.Empty;
+                passwordEditText.Text = string.Empty;
                 loggedIn = true;
                 Intent t = new Intent(this, typeof(MainActivity));
                 StartActivity(t);
