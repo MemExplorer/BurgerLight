@@ -30,38 +30,48 @@
         android:scrollbars="vertical"
         />
 
-    <TextView
-        android:text="Order Instruction"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewComment"
-        android:layout_marginLeft="24dp"
-        android:layout_marginBottom="5dp"
-        android:textColor="#FF4818"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="208.0dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:showIn="@layout/app_bar_main"
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        android:layout_marginTop="24dp"
+        >
+
+        <TextView
+            android:text="Order Instruction"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewComment"
+            android:layout_marginLeft="24dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="#FF4818"
         />
 
 
-    <EditText
-        android:inputType="textMultiLine"
-        android:layout_width="match_parent"
-        android:layout_height="80.0dp"
-        android:id="@+id/editTextInstruction"
-        android:background="@drawable/edittext_order_bg"
-        android:layout_marginRight="35.0dp"
-        android:layout_marginLeft="35.0dp" 
+        <EditText
+            android:inputType="textMultiLine"
+            android:layout_width="match_parent"
+            android:layout_height="80.0dp"
+            android:id="@+id/editTextInstruction"
+            android:background="@drawable/edittext_order_bg"
+            android:layout_marginRight="35.0dp"
+            android:layout_marginLeft="35.0dp" 
         />
-    <Button
-        android:text="Checkout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="35.0dp"
-        android:layout_marginLeft="35.0dp"
-        android:background="@drawable/round_cart_btn"
-        android:layout_marginTop="12dp"
-        android:textColor="@android:color/white"
-        android:id="@+id/button1" />
-
+        <Button
+            android:text="Checkout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="35.0dp"
+            android:layout_marginLeft="35.0dp"
+            android:background="@drawable/round_cart_btn"
+            android:layout_marginTop="12dp"
+            android:textColor="@android:color/white"
+            android:id="@+id/button1" />
+    </LinearLayout>
 
 
 
