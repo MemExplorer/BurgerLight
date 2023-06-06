@@ -84,7 +84,7 @@
         android:layout_height="75px"
         android:background="@drawable/rounded_secondarybutton"
         android:id="@+id/BackBtn" />
-
+    </LinearLayout>
     </RelativeLayout>
     
 </LinearLayout>  
