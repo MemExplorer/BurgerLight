@@ -1,16 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/app_bar_main">
+    tools:showIn="@layout/app_bar_main"
+    android:orientation="vertical"
+    android:padding="30dp">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Orders" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Orders"
+            android:textColor="#FF4818"
+            android:textSize="20dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:padding="10dp"
+            android:textColor="@android:color/black"
+            android:background="@android:drawable/edit_text"
+            android:layout_marginTop="10dp"
+            android:maxLines="100"
+            android:enabled="false"
+            android:inputType="textMultiLine"
+            android:id="@+id/order_list"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Order Instructions"
+            android:layout_marginTop="40dp"
+            android:textColor="#FF4818"
+            android:textSize="20dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:padding="10dp"
+            android:textColor="@android:color/black"
+            android:background="@android:drawable/edit_text"
+            android:layout_marginTop="10dp"
+            android:maxLines="100"
+            android:enabled="false"
+            android:inputType="textMultiLine"
+            android:id="@+id/input_comments"/>
 
-</RelativeLayout>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp"
+            android:padding="5dp">
+                
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Price"
+                android:textColor="#FF4818"
+                android:textSize="20dp"/>
+            <EditText
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textColor="#FF4818"
+                android:background="@drawable/edit_text_rounded_border"
+                android:layout_marginLeft="50dp"
+                android:enabled="false"
+                android:inputType="text"
+                android:textAlignment="textEnd"
+                android:text="PHP"
+                android:id="@+id/input_comments"/>
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <Button
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:text="Reset"
+            android:layout_marginRight="50dp"
+            android:backgroundTint="#EBDDD7"
+            android:textColor="#FF4818"
+            android:id="@+id/clear_btn"/>
+        <Button
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:text="Checkout"
+            android:textColor="@android:color/white"
+            android:backgroundTint="#FF4818"
+            android:id="@+id/order_btn"/>
+    </LinearLayout>
+
+</LinearLayout>
