@@ -2,9 +2,11 @@
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
+using BurgerLightMobile.API;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +18,10 @@ namespace BurgerLightMobile.Activities
     public class RegisterActivity : AppCompatActivity
     {
         private Button registerBtn;
+        private Button backBtn;
+        private EditText usernameTxt;
+        private EditText passwordTxt;
+        private EditText passwordConfirmTxt;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -24,16 +30,39 @@ namespace BurgerLightMobile.Activities
 
             registerBtn = FindViewById<Button>(Resource.Id.RegisterBtn);
             registerBtn.Click += RegisterBtn_Click;
+
+            backBtn = FindViewById<Button>(Resource.Id.BackBtnRegister);
+            backBtn.Click += BackBtn_Click;
+
+            usernameTxt = FindViewById<EditText>(Resource.Id.registerUsername);
+            passwordTxt = FindViewById<EditText>(Resource.Id.registerPassword);
+            passwordConfirmTxt = FindViewById<EditText>(Resource.Id.registerConfirmPassword);
+        }
+
+        private void BackBtn_Click(object sender, EventArgs e)
+        {
+            Finish();
         }
 
         private void RegisterBtn_Click(object sender, EventArgs e)
         {
-            //TODO: Process information to server
-            var intent = new Intent(this, typeof(LoginActivity));
+            if(passwordTxt.Text != passwordConfirmTxt.Text)
+            {
+                Toast.MakeText(this, "Passwords do not match", ToastLength.Short).Show();
+                return;
+            }
 
-            //make sure we can't go back to register form
-            intent.SetFlags(ActivityFlags.ClearTop | ActivityFlags.ClearTask | ActivityFlags.NewTask);
-            StartActivity(intent);
+            if(BurgerLightAPI.RegisterUser(usernameTxt.Text, passwordTxt.Text, out string eMsg))
+            {
+                Toast.MakeText(this, "Successfully registered user!", ToastLength.Short).Show();
+                var intent = new Intent(this, typeof(LoginActivity));
+                StartActivity(intent);
+                Finish();
+                return;
+            }
+
+
+            Toast.MakeText(this, eMsg, ToastLength.Short).Show();
         }
     }
 }
