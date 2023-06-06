@@ -67,7 +67,6 @@
     <Compile Include="Fragments\OrdersFragment.cs" />
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Fragments\HomeFragment.cs" />
-    <Compile Include="ProductList.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -171,21 +170,13 @@
     <AndroidResource Include="Resources\drawable\password_invisible_eye.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\ProductCardView.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\burger.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\round_cart_btn.xml" />
-  </ItemGroup>
     <AndroidResource Include="Resources\drawable\home_orng.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\shopping_cart_orng.png" />
+    <AndroidResource Include="Resources\drawable\menu_orng.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\menu_orng.png" />
+    <AndroidResource Include="Resources\drawable\shopping_cart_orng.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
