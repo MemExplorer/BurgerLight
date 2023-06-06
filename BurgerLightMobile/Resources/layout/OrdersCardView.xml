@@ -5,7 +5,6 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    
     >
 
     <androidx.cardview.widget.CardView
@@ -13,7 +12,7 @@
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/cardView1"
+        android:id="@+id/cardViewOrder"
         app:cardElevation="4dp"
         app:cardCornerRadius="10dp"
         app:cardBackgroundColor="#EBDDD7"
@@ -36,7 +35,7 @@
             <ImageView
                 android:layout_width="200px"
                 android:layout_height="200px"
-                android:id="@+id/imageView"
+                android:id="@+id/imageViewOrder"
                 android:scaleType="centerCrop"
                 android:layout_rowSpan="3"
                 android:layout_row="0"
@@ -44,11 +43,10 @@
                 android:src="@drawable/burger"
                 android:layout_marginRight="18.6dp" />
             <TextView
-                android:layout_width="75.0dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Caption"
-                android:id="@+id/textView"
+                android:id="@+id/textViewOrderName"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="4dp"
                 android:layout_marginBottom="5dp"
@@ -65,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="4dp"
-                android:id="@+id/textView1"
+                android:id="@+id/textViewOrderPrice"
                 android:layout_row="1"
                 android:layout_column="1"
                 android:textColor="#ffff4818"
@@ -83,12 +81,11 @@
                 android:textSize="9dp"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:background="@drawable/round_cart_btn"
-                android:textColor="#ffffffff"
+                android:background="@drawable/orders_del_btnbg"
+                android:textColor="#ffff4818"
                 android:textFontWeight="700" 
-                
+                android:layout_gravity="right"
                 />
-
 
             <Button
                 android:text="-"
@@ -109,7 +106,7 @@
             <TextView
                 android:text="0"
                 android:id="@+id/textViewQty"
-                android:textSize=12dp"
+                android:textSize="12dp"
                 android:layout_marginRight="17.7dp"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
