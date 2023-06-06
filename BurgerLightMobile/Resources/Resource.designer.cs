@@ -3330,6 +3330,7 @@ namespace BurgerLightMobile
 			
 			// aapt resource value: 0x7F07006E
 			public const int home = 2131165294;
+			public const int home_orng = 2131165294;
 			
 			// aapt resource value: 0x7F07006F
 			public const int ic_menu_camera = 2131165295;
@@ -3417,6 +3418,61 @@ namespace BurgerLightMobile
 			
 			// aapt resource value: 0x7F07008B
 			public const int round_cart_btn = 2131165323;
+			public const int menu_orng = 2131165305;
+			
+			// aapt resource value: 0x7F07007A
+			public const int mtrl_snackbar_background = 2131165306;
+			
+			// aapt resource value: 0x7F07007B
+			public const int mtrl_tabs_default_indicator = 2131165307;
+			
+			// aapt resource value: 0x7F07007C
+			public const int navigation_empty_icon = 2131165308;
+			
+			// aapt resource value: 0x7F07007D
+			public const int notification_action_background = 2131165309;
+			
+			// aapt resource value: 0x7F07007E
+			public const int notification_bg = 2131165310;
+			
+			// aapt resource value: 0x7F07007F
+			public const int notification_bg_low = 2131165311;
+			
+			// aapt resource value: 0x7F070080
+			public const int notification_bg_low_normal = 2131165312;
+			
+			// aapt resource value: 0x7F070081
+			public const int notification_bg_low_pressed = 2131165313;
+			
+			// aapt resource value: 0x7F070082
+			public const int notification_bg_normal = 2131165314;
+			
+			// aapt resource value: 0x7F070083
+			public const int notification_bg_normal_pressed = 2131165315;
+			
+			// aapt resource value: 0x7F070084
+			public const int notification_icon_background = 2131165316;
+			
+			// aapt resource value: 0x7F070085
+			public const int notification_template_icon_bg = 2131165317;
+			
+			// aapt resource value: 0x7F070086
+			public const int notification_template_icon_low_bg = 2131165318;
+			
+			// aapt resource value: 0x7F070087
+			public const int notification_tile_bg = 2131165319;
+			
+			// aapt resource value: 0x7F070088
+			public const int notify_panel_notification_icon_bg = 2131165320;
+			
+			// aapt resource value: 0x7F070089
+			public const int password_invisible_eye = 2131165321;
+			
+			// aapt resource value: 0x7F07008A
+			public const int password_visible_eye = 2131165322;
+			
+			// aapt resource value: 0x7F07008B
+			public const int power = 2131165323;
 			
 			// aapt resource value: 0x7F07008C
 			public const int shopping_cart = 2131165324;
@@ -3429,6 +3485,16 @@ namespace BurgerLightMobile
 			
 			// aapt resource value: 0x7F07008F
 			public const int tooltip_frame_light = 2131165327;
+			public const int shopping_cart_orng = 2131165325;
+			
+			// aapt resource value: 0x7F07008E
+			public const int side_nav_bar = 2131165326;
+			
+			// aapt resource value: 0x7F07008F
+			public const int tooltip_frame_dark = 2131165327;
+			
+			// aapt resource value: 0x7F070090
+			public const int tooltip_frame_light = 2131165328;
 			
 			static Drawable()
 			{
