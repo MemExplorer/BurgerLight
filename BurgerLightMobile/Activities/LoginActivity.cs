@@ -6,6 +6,7 @@ using Android.Text;
 using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
+using BurgerLightMobile.API;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,17 +17,22 @@ namespace BurgerLightMobile.Activities
     [Activity(Label = "Login", Theme = "@style/LoginTheme")]
     public class LoginActivity : AppCompatActivity
     {
+        private bool loggedIn;
         private ImageButton passwordVisibilityBtn;
         private EditText passwordEditText;
         private Button loginBtn;
         private Button backBtn;
+        private EditText usernameText;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.login_layout);
 
+            loggedIn = false;
             //initialize controls
+            usernameText = FindViewById<EditText>(Resource.Id.loginUsername);
+
             loginBtn = FindViewById<Button>(Resource.Id.LoginBtn);
             loginBtn.Click += LoginBtn_Click;
 
@@ -36,6 +42,18 @@ namespace BurgerLightMobile.Activities
             passwordEditText = FindViewById<EditText>(Resource.Id.loginPassword);
             backBtn = FindViewById<Button>(Resource.Id.BackBtnLogin);
             backBtn.Click += BackBtn_Click;
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+            //logout user if user pressed back btn
+            if (loggedIn)
+            {
+                loggedIn = false;
+                BurgerLightAPI.LogoutUser(out _);
+            }
         }
 
         private void BackBtn_Click(object sender, EventArgs e)
@@ -63,11 +81,18 @@ namespace BurgerLightMobile.Activities
 
         private void LoginBtn_Click(object sender, EventArgs e)
         {
-            //TODO: Check credentials from server
+            if(BurgerLightAPI.LoginUser(usernameText.Text, passwordEditText.Text, out string eMsg))
+            {
+                //start main app
+                usernameText.Text = string.Empty;
+                passwordEditText.Text = string.Empty;
+                loggedIn = true;
+                Intent t = new Intent(this, typeof(MainActivity));
+                StartActivity(t);
+                return;
+            }
 
-            //start main app
-            Intent t = new Intent(this, typeof(MainActivity));
-            StartActivity(t);
+            Toast.MakeText(this, eMsg, ToastLength.Short).Show();
         }
     }
 }
