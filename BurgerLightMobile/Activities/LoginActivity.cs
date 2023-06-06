@@ -13,7 +13,7 @@ using System.Text;
 
 namespace BurgerLightMobile.Activities
 {
-    [Activity(Label = "Login", Theme = "@style/LoginTheme", MainLauncher = true)]
+    [Activity(Label = "Login", Theme = "@style/LoginTheme")]
     public class LoginActivity : AppCompatActivity
     {
         private ImageButton passwordVisibilityBtn;
