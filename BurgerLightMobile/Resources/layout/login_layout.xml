@@ -1,12 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:minWidth="25px"
-    android:minHeight="25px">
-    <TextView
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="425px"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@color/colorRedBurger">
+     <ImageView
+        android:src="@drawable/logo_burger_light_1"
+        android:layout_width="600px"
+        android:layout_height="600px"
+        android:id="@+id/imageView1" />
+    </LinearLayout>
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:gravity="center"
+        android:background="@color/colorSecondBurger"
+        android:padding="30px">
+    <LinearLayout
+        android:layout_width="700px"
+        android:layout_height="800px"
+        android:orientation="vertical"
+        android:gravity="center">
+<TextView
         android:text="Username"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
@@ -28,16 +53,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-       <EditText
+        android:orientation="horizontal">
+    <EditText
         android:inputType="textPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
          android:textColor="#000"
         android:id="@+id/loginPassword" />
-        <ImageButton
+    <ImageButton
         android:id="@+id/passwordVisibilityButton"
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -46,10 +70,21 @@
         android:scaleType="fitCenter"
         android:src="@drawable/password_invisible_eye"
         />
-        </LinearLayout>
-        <Button
+    </LinearLayout>
+    <Button
         android:text="Login"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="75px"
+        android:layout_marginBottom="20px"
+        android:background="@drawable/rounded_redbutton"
         android:id="@+id/LoginBtn" />
-</LinearLayout>
+    <Button
+        android:text="Back"
+        android:layout_width="match_parent"
+        android:layout_height="75px"
+        android:background="@drawable/rounded_secondarybutton"
+        android:id="@+id/BackBtn" />
+    </LinearLayout>
+    </RelativeLayout>
+    
+</LinearLayout>  
