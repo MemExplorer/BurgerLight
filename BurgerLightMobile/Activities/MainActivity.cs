@@ -14,7 +14,7 @@ using Toolbar = AndroidX.AppCompat.Widget.Toolbar;
 
 namespace BurgerLightMobile
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
+    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar")]
     public class MainActivity : AppCompatActivity, NavigationView.IOnNavigationItemSelectedListener
     {
         private Button LogoutBtn;
@@ -42,7 +42,7 @@ namespace BurgerLightMobile
 
         private void LogoutBtn_Click(object sender, EventArgs e)
         {
-            //do logout function
+            Finish();
         }
 
         public override void OnBackPressed()
