@@ -7,22 +7,22 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="600px"
+        android:layout_width="300dp"
         android:layout_height="match_parent"
         android:gravity="center">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200px"
+            android:layout_height="100dp"
             android:orientation="horizontal"
             android:gravity="center">
             <ImageView
                 android:src="@drawable/logo_burger_light"
-                android:layout_width="75px"
+                android:layout_width="35dp"
                 android:layout_height="match_parent"
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_marginRight="10px"
+                android:minWidth="25dp"
+                android:minHeight="25dp"
+                android:layout_marginRight="5dp"
                 android:id="@+id/imageView1" />
             <TextView
                 android:text="BurgerLight"
@@ -30,7 +30,7 @@
                 android:layout_height="match_parent"
                 android:textStyle="bold"
                 android:gravity="center"
-                android:textSize="28sp"
+                android:textSize="28dp"
                 android:id="@+id/textView1" />
         </LinearLayout>
         <LinearLayout
@@ -40,29 +40,29 @@
             <ImageView
                 android:src="@drawable/hamburgers"
                 android:layout_width="match_parent"
-                android:layout_height="500px"
-                android:minWidth="300px"
-                android:minHeight="300px"
+                android:layout_height="250dp"
+                android:minWidth="150dp"
+                android:minHeight="150dp"
                 android:id="@+id/imageView2" />
             <TextView
                 android:text="Yummy in Every Bite!"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:paddingBottom="50px"
+                android:paddingBottom="25dp"
                 android:id="@+id/textView2" />
             <Button
                 android:text="Create Account"
                 android:layout_width="match_parent"
-                android:layout_height="75px"
-                android:layout_marginBottom="20px"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/rounded_redbutton"
                 android:id="@+id/createaccBtn" />
             <Button
                 android:text="Login"
                 android:layout_width="match_parent"
-                android:layout_height="75px"
-                android:layout_marginBottom="60px"
+                android:layout_height="40dp"
+                android:layout_marginBottom="30dp"
                 android:background="@drawable/rounded_secondarybutton"
                 android:id="@+id/loginbutton" />
             <TextView
