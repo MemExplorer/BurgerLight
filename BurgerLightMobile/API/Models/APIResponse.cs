@@ -22,7 +22,7 @@ namespace BurgerLightMobile.API.Models
             if(success)
                 return JsonConvert.DeserializeObject<ResType>(response);
 
-            throw new InvalidOperationException(response);
+            return default(ResType);
         }
 
         public string GetError()

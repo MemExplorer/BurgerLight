@@ -67,6 +67,7 @@
     <Compile Include="API\BurgerLightAPI.cs" />
     <Compile Include="API\Models\APIResponse.cs" />
     <Compile Include="API\Models\LoginResponse.cs" />
+    <Compile Include="API\Models\MenuResponse.cs" />
     <Compile Include="Fragments\MenuFragment.cs" />
     <Compile Include="Fragments\Menu\ProductList.cs" />
     <Compile Include="Fragments\OrdersFragment.cs" />

@@ -7,6 +7,9 @@ using Android.Views;
 using Android.Widget;
 using AndroidX.Fragment.App;
 using AndroidX.RecyclerView.Widget;
+using BurgerLightMobile.API;
+using BurgerLightMobile.API.Models;
+using Org.Apache.Http.Cookies;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +19,7 @@ namespace BurgerLightMobile.Fragments
 {
     public class MenuFragment : AndroidX.Fragment.App.Fragment
     {
-        ProductList mProductList;
+        List<MenuResponse> mProductList;
         RecyclerView mRecyclerView;
         ProductListAdapter mAdapter;
         LinearLayoutManager mLayoutManager;
@@ -38,7 +41,7 @@ namespace BurgerLightMobile.Fragments
 
             //Populate mProductList here for RecyclerView
             //ProductList has temporary built in products
-            mProductList = new ProductList();
+            mProductList = BurgerLightAPI.FetchMenu(out string eMsg);
 
             // Instantiate the adapter and pass in its data source:
             mAdapter = new ProductListAdapter(mProductList);
@@ -73,12 +76,14 @@ namespace BurgerLightMobile.Fragments
 
         public Button AddButton { get; private set; }
 
+        public TextView Price { get; private set; }
+
         public ProductViewHolder(View itemView, Action<int> listener) : base(itemView)
         {
             // Locate and cache view references:
             Image = itemView.FindViewById<ImageView>(Resource.Id.imageView);
             Caption = itemView.FindViewById<TextView>(Resource.Id.textView);
-
+            Price = ItemView.FindViewById<TextView>(Resource.Id.menuPrice);
             AddButton = ItemView.FindViewById<Button>(Resource.Id.button1);
 
             // Detect user clicks on the item view and report which item
@@ -95,20 +100,20 @@ namespace BurgerLightMobile.Fragments
 
     // Adapter to connect the data set (Product List) to the RecyclerView: 
 
-    public class ProductListAdapter : RecyclerView.Adapter
+    internal class ProductListAdapter : RecyclerView.Adapter
     {
         public event EventHandler<int> ItemClick;
 
-        ProductList mProductList;
+        List<MenuResponse> mProductList;
 
-        public ProductListAdapter(ProductList productList)
+        public ProductListAdapter(List<MenuResponse> productList)
         {
             mProductList = productList;
         }
 
         public override int ItemCount
         {
-            get { return mProductList.ProductListCount; }
+            get { return mProductList.Count; }
         }
 
 
@@ -119,19 +124,20 @@ namespace BurgerLightMobile.Fragments
 
             // Set the ImageView and TextView in this ViewHolder's CardView 
             // from this position in the Product List:
-            vh.Image.SetImageResource(mProductList[position].PhotoId);
-            vh.Caption.Text = mProductList[position].ProductName;
-
+            vh.Image.SetImageResource(Resource.Drawable.burger); //temo value
+            vh.Caption.Text = mProductList[position].name;
+            vh.Price.Text = "P" + mProductList[position].price.ToString("n2");
 
             ///////////SET OnClick of Button in Recycler View HERE
-            string strProductToast = String.Format("Pressed on Product: {0}", mProductList[position].ProductName);
-            vh.AddButton.Click += (sender, e) =>
-            {
-                Toast.MakeText(Application.Context, strProductToast, ToastLength.Long).Show();
-
-            };
+            string strProductToast = String.Format("Pressed on Product: {0}", mProductList[position].name);
+            vh.AddButton.Click += (s, e) => AddButton_Click(mProductList[position].id, s, e);
 
 
+        }
+
+        private void AddButton_Click(int id, object sender, EventArgs e)
+        {
+            //add cart api
         }
 
         // Create a new Product CardView (invoked by the layout manager): 
