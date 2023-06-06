@@ -23,7 +23,7 @@
         android:orientation="horizontal"
         android:paddingTop="50px">
         <Button
-            android:text="A"
+            android:text="&lt;"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:minWidth="25px"
@@ -63,7 +63,7 @@
                 android:id="@+id/textView2" />
         </LinearLayout>
          <Button
-            android:text="B"
+            android:text="&gt;"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:minWidth="25px"
