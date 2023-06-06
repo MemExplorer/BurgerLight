@@ -64,6 +64,7 @@
     <Compile Include="Activities\LoginActivity.cs" />
     <Compile Include="Activities\RegisterActivity.cs" />
     <Compile Include="Activities\StartupActivity.cs" />
+    <Compile Include="API\BurgerLightAPI.cs" />
     <Compile Include="Fragments\MenuFragment.cs" />
     <Compile Include="Fragments\Menu\ProductList.cs" />
     <Compile Include="Fragments\OrdersFragment.cs" />
@@ -209,6 +210,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\startup_layout.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="API\Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
