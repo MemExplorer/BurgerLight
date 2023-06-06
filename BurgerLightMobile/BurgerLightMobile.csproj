@@ -198,7 +198,9 @@
     <AndroidResource Include="Resources\drawable\burger.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\OrdersCardView.xml">
+    <AndroidResource Include="Resources\layout\OrdersCardView.xml"/>
+  </ItemGroup>
+  <ItemGroup>
     <AndroidResource Include="Resources\drawable\editText_rounded_border.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -211,6 +213,7 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\orders_del_btnbg.xml" />
+  </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\logo_burger_light.png" />
   </ItemGroup>
