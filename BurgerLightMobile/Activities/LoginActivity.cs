@@ -13,7 +13,7 @@ using System.Text;
 
 namespace BurgerLightMobile.Activities
 {
-    [Activity(Label = "LoginActivity", Theme = "@style/LoginTheme", MainLauncher = true)]
+    [Activity(Label = "Login", Theme = "@style/LoginTheme", MainLauncher = true)]
     public class LoginActivity : AppCompatActivity
     {
         private ImageButton passwordVisibilityBtn;
@@ -55,6 +55,8 @@ namespace BurgerLightMobile.Activities
 
         private void LoginBtn_Click(object sender, EventArgs e)
         {
+            //TODO: Check credentials from server
+
             //start main app
             Intent t = new Intent(this, typeof(MainActivity));
             StartActivity(t);

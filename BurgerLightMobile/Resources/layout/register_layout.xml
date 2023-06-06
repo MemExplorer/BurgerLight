@@ -16,6 +16,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="#000"
         android:id="@+id/registerUsername" />
     <TextView
         android:text="Password"
@@ -28,6 +29,7 @@
         android:inputType="textPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="#000"
         android:id="@+id/registerPassword" />
         <TextView
         android:text="Confirm Password"
@@ -40,10 +42,11 @@
         android:inputType="textPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="#000"
         android:id="@+id/registerConfirmPassword" />
         <Button
-        android:text="Login"
+        android:text="Register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/LoginBtn" />
+        android:id="@+id/RegisterBtn" />
 </LinearLayout>
