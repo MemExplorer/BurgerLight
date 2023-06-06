@@ -4,7 +4,9 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using BurgerLightMobile.API.Models;
 using Java.Util;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -32,6 +34,44 @@ namespace BurgerLightMobile.API
             var response = (HttpWebResponse)request.GetResponse();
             using (StreamReader reader = new StreamReader(response.GetResponseStream()))
                 return reader.ReadToEnd();
+        }
+
+        public static bool LoginUser(string username, string password, out string ErrorMessage)
+        {
+            ErrorMessage = string.Empty;
+            Dictionary<string, string> paramlist = new Dictionary<string, string>
+            {
+                { "username", username },
+                { "password", password }
+            };
+
+            string strApiResp = CreateAPIRequest("/controllers/user/userlogin.php", paramlist);
+            APIResponse apiresponse = JsonConvert.DeserializeObject<APIResponse>(strApiResp);
+
+            //set error message if not success
+            if (!apiresponse.success)
+                ErrorMessage = apiresponse.response;
+
+            return apiresponse.success;
+        }
+
+        public static bool RegisterUser(string username, string password, out string ErrorMessage)
+        {
+            ErrorMessage = string.Empty;
+            Dictionary<string, string> paramlist = new Dictionary<string, string>
+            {
+                { "username", username },
+                { "password", password }
+            };
+
+            string strApiResp = CreateAPIRequest("/controllers/user/useregister.php", paramlist);
+            APIResponse apiresponse = JsonConvert.DeserializeObject<APIResponse>(strApiResp);
+
+            //set error message if not success
+            if (!apiresponse.success)
+                ErrorMessage = apiresponse.response;
+
+            return apiresponse.success;
         }
     }
 }
