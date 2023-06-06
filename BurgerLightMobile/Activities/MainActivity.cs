@@ -40,6 +40,7 @@ namespace BurgerLightMobile
             LogoutBtn.Click += LogoutBtn_Click;
         }
 
+
         private void LogoutBtn_Click(object sender, EventArgs e)
         {
             Finish();
