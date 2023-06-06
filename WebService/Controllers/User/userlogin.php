@@ -13,8 +13,12 @@ try {
 		return;
 	}
 
-	$username = "testuser";
-	$password = "testpassword";
+	//$username = "testuser";
+	//$password = "testpassword";
+
+	$username = $_POST['usrnm'];
+	$password = $_POST['pswd'];
+
 	// Prepare a SQL statement to select the user from the database
 	$stmt = $conn->prepare("SELECT * FROM tbluserlogin WHERE username = ?");
 	$stmt->bind_param("s", $username);
