@@ -13,12 +13,13 @@ using System.Text;
 
 namespace BurgerLightMobile.Activities
 {
-    [Activity(Label = "Login", Theme = "@style/LoginTheme", MainLauncher = true)]
+    [Activity(Label = "Login", Theme = "@style/LoginTheme")]
     public class LoginActivity : AppCompatActivity
     {
         private ImageButton passwordVisibilityBtn;
         private EditText passwordEditText;
         private Button loginBtn;
+        private Button backBtn;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -33,6 +34,13 @@ namespace BurgerLightMobile.Activities
             passwordVisibilityBtn.Click += PasswordVisibilityBtn_Click;
 
             passwordEditText = FindViewById<EditText>(Resource.Id.loginPassword);
+            backBtn = FindViewById<Button>(Resource.Id.BackBtnLogin);
+            backBtn.Click += BackBtn_Click;
+        }
+
+        private void BackBtn_Click(object sender, EventArgs e)
+        {
+            Finish();
         }
 
         private void PasswordVisibilityBtn_Click(object sender, EventArgs e)
