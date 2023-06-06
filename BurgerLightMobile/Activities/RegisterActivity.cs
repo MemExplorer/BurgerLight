@@ -2,6 +2,7 @@
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
@@ -16,6 +17,7 @@ namespace BurgerLightMobile.Activities
     public class RegisterActivity : AppCompatActivity
     {
         private Button registerBtn;
+        private Button backBtn;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -24,16 +26,22 @@ namespace BurgerLightMobile.Activities
 
             registerBtn = FindViewById<Button>(Resource.Id.RegisterBtn);
             registerBtn.Click += RegisterBtn_Click;
+
+            backBtn = FindViewById<Button>(Resource.Id.BackBtnRegister);
+            backBtn.Click += BackBtn_Click;
+        }
+
+        private void BackBtn_Click(object sender, EventArgs e)
+        {
+            Finish();
         }
 
         private void RegisterBtn_Click(object sender, EventArgs e)
         {
             //TODO: Process information to server
             var intent = new Intent(this, typeof(LoginActivity));
-
-            //make sure we can't go back to register form
-            intent.SetFlags(ActivityFlags.ClearTop | ActivityFlags.ClearTask | ActivityFlags.NewTask);
             StartActivity(intent);
+            Finish();
         }
     }
 }
