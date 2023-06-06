@@ -53,6 +53,8 @@ namespace BurgerLightMobile.Activities
         protected void btnCheckout_Click(object sender, EventArgs e)
         {
             //Proceed to checkout completed activity
+            
+
 
         }
 
