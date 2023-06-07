@@ -132,5 +132,17 @@ namespace BurgerLightMobile.API
 
             return apiResp.GetResponse();
         }
+
+        public static List<OrderResponse> FetchOrders(out string ErrorMessage)
+        {
+            ErrorMessage = string.Empty;
+
+            APIResponse<List<OrderResponse>> apiResp = CreateAPIRequest<List<OrderResponse>>("/controllers/FetchOrders.php");
+
+            if (!apiResp.success)
+                ErrorMessage = apiResp.GetError();
+
+            return apiResp.GetResponse();
+        }
     }
 }

@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace BurgerLightMobile.Fragments
 {
@@ -31,6 +32,32 @@ namespace BurgerLightMobile.Fragments
             // Create your fragment here
         }
 
+        public override void OnStart()
+        {
+            base.OnStart();
+            UpdateItems();
+        }
+
+        private async void UpdateItems()
+        {
+            await Task.Run(() => {
+
+                this.Activity.RunOnUiThread(() => {
+                    mProductList = BurgerLightAPI.FetchMenu(out string eMsg);
+                    if (mProductList == null)
+                    {
+                        Toast.MakeText(this.Activity.ApplicationContext, eMsg, ToastLength.Short);
+                        return;
+                    }
+
+                    mAdapter.mProductList = mProductList;
+                    mAdapter.NotifyDataSetChanged();
+
+                });
+            
+            });
+        }
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             // Use this to return your custom view for this Fragment
@@ -41,15 +68,9 @@ namespace BurgerLightMobile.Fragments
 
             //Populate mProductList here for RecyclerView
             //ProductList has temporary built in products
-            mProductList = BurgerLightAPI.FetchMenu(out string eMsg);
-            if(mProductList == null)
-            {
-                Toast.MakeText(this.Activity.ApplicationContext, eMsg, ToastLength.Short);
-                return view;
-            }
+            mProductList = new List<MenuResponse>();
             // Instantiate the adapter and pass in its data source:
             mAdapter = new ProductListAdapter(mProductList, this.Context);
-
             // Get our RecyclerView layout:
             mRecyclerView = view.FindViewById<RecyclerView>(Resource.Id.recyclerView1);
 
@@ -108,7 +129,7 @@ namespace BurgerLightMobile.Fragments
     {
         public event EventHandler<int> ItemClick;
 
-        List<MenuResponse> mProductList;
+        public List<MenuResponse> mProductList;
         Context AppCtx;
 
         public ProductListAdapter(List<MenuResponse> productList, Context appCtx)
