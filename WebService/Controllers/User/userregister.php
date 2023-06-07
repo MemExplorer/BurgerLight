@@ -3,8 +3,8 @@ include_once('../../connection.php');
 include_once('../../Models/response.php');
 include_once('../../utils.php');
 
-$username = $_POST['usrnm'];
-$password = $_POST['pswd'];
+$username = $_GET['usrnm'];
+$password = $_GET['pswd'];
 
 try {
     $stmt = $conn->prepare("SELECT * FROM tbluserlogin WHERE username = ?");
