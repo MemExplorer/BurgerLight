@@ -22,6 +22,12 @@ class Utils
     {
         return json_decode(json_encode(get_object_vars($object)), true);
     }
+
+    public static function ValidateInt($number)
+    {
+        $number = filter_var($number, FILTER_VALIDATE_INT);
+        return ($number !== FALSE);
+    }
 }
 
 ?>

@@ -115,5 +115,22 @@ namespace BurgerLightMobile.API
 
             return apiResp.GetResponse();
         }
+
+        public static AddCartResponse AddCart(int id, int q, out string ErrorMessage)
+        {
+            ErrorMessage = string.Empty;
+            Dictionary<string, string> paramlist = new Dictionary<string, string>
+            {
+                { "id", id.ToString() },
+                { "q", q.ToString() }
+            };
+
+            APIResponse<AddCartResponse> apiResp = CreateAPIRequest<AddCartResponse>("/controllers/AddCart.php", paramlist);
+
+            if (!apiResp.success)
+                ErrorMessage = apiResp.GetError();
+
+            return apiResp.GetResponse();
+        }
     }
 }
