@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/app_bar_main"
-    android:orientation="vertical"
     android:padding="30dp">
-
-    <TextView
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:id="@+id/layout1">
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Orders"
@@ -20,63 +26,76 @@
             android:layout_height="100dp"
             android:padding="10dp"
             android:textColor="@android:color/black"
-            android:background="@android:drawable/edit_text"
+            android:background="@drawable/editText_rounded_border"
             android:layout_marginTop="10dp"
             android:maxLines="100"
             android:enabled="false"
             android:inputType="textMultiLine"
             android:id="@+id/input_comments"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/layout1"
+        android:id="@+id/layout2">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Order Instructions"
             android:layout_marginTop="40dp"
             android:textColor="#FF4818"
-            android:textSize="20dp"/>
+            android:textSize="20dp"
+            android:id="@+id/textView2" />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:padding="10dp"
             android:textColor="@android:color/black"
-            android:background="@android:drawable/edit_text"
+            android:background="@drawable/editText_rounded_border"
             android:layout_marginTop="10dp"
             android:maxLines="100"
             android:enabled="false"
             android:inputType="textMultiLine"
             android:id="@+id/input_instructions"/>
-
+    </LinearLayout>
     <LinearLayout
-            android:layout_width="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:layout_below="@id/layout2"
+        android:id="@+id/layout3">
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="30dp"
-            android:gravity="center"
-            android:padding="5dp">
-                
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Total Price"
-                android:textColor="#FF4818"
-                android:textSize="20dp"/>
-            <EditText
-                android:layout_width="170dp"
-                android:layout_height="wrap_content"
-                android:textColor="#FF4818"
-                android:background="@android:drawable/edit_text"
-                android:layout_marginLeft="50dp"
-                android:enabled="false"
-                android:inputType="text"
-                android:textAlignment="textEnd"
-                android:text="PHP"
-                android:id="@+id/totalPrice_display"/>
-        </LinearLayout>
+            android:text="Total Price"
+            android:textColor="#FF4818"
+            android:textSize="20dp"/>
+        <EditText
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:textColor="#FF4818"
+            android:background="@drawable/editText_rounded_border"
+            android:layout_marginLeft="40dp"
+            android:enabled="false"
+            android:inputType="text"
+            android:textAlignment="textEnd"
+            android:padding="10dp"
+            android:text="PHP"
+            android:id="@+id/totalPrice_display"/>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/layout4">
         <Button
             android:layout_width="110dp"
             android:layout_height="wrap_content"
@@ -94,4 +113,4 @@
             android:id="@+id/order_btn"/>
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>
