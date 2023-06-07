@@ -144,5 +144,17 @@ namespace BurgerLightMobile.API
 
             return apiResp.GetResponse();
         }
+
+        public static bool ProcessOrder(out string ErrorMessage)
+        {
+            ErrorMessage = string.Empty;
+
+            APIResponse<bool> apiResp = CreateAPIRequest<bool>("/controllers/ProcessOrder.php");
+
+            if (!apiResp.success)
+                ErrorMessage = apiResp.GetError();
+
+            return apiResp.success;
+        }
     }
 }

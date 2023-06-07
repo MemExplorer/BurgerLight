@@ -48,12 +48,14 @@
             />
             <EditText
                 android:layout_width="match_parent"
+                android:textColor="#000"
                 android:layout_height="40.9dp"
                 android:id="@+id/editTextLname"
                 android:background="@drawable/checkout_edittext_bg"
                 android:layout_marginRight="20.0dp"
                 android:layout_marginLeft="20.0dp"
-                android:layout_marginBottom="12dp"/>
+                android:layout_marginBottom="12dp"
+                android:paddingLeft="10dp"/>
 
             <TextView
                 android:text="Firstname"
@@ -69,12 +71,14 @@
             />
             <EditText
                 android:layout_width="match_parent"
+                android:textColor="#000"
                 android:layout_height="40.9dp"
                 android:id="@+id/editTextFname"
                 android:background="@drawable/checkout_edittext_bg"
                 android:layout_marginRight="20.0dp"
                 android:layout_marginLeft="20.0dp"
-                android:layout_marginBottom="12dp"/>
+                android:layout_marginBottom="12dp"
+                android:paddingLeft="10dp"/>
 
 
 
@@ -92,12 +96,14 @@
             />
             <EditText
                 android:layout_width="match_parent"
+                android:textColor="#000"
                 android:layout_height="40.9dp"
                 android:id="@+id/editTextEmail"
                 android:background="@drawable/checkout_edittext_bg"
                 android:layout_marginRight="20.0dp"
                 android:layout_marginLeft="20.0dp"
-                android:layout_marginBottom="12dp"/>
+                android:layout_marginBottom="12dp"
+                android:paddingLeft="10dp"/>
 
 
 
@@ -114,13 +120,15 @@
                 android:layout_marginBottom="4dp"
             />
             <EditText
+                android:textColor="#000"
                 android:layout_width="match_parent"
                 android:layout_height="40.9dp"
                 android:id="@+id/editTextPhoneNum"
                 android:background="@drawable/checkout_edittext_bg"
                 android:layout_marginRight="20.0dp"
                 android:layout_marginLeft="20.0dp"
-                android:layout_marginBottom="12dp"/>
+                android:layout_marginBottom="12dp"
+                android:paddingLeft="10dp"/>
 
 
             <TextView
@@ -154,12 +162,14 @@
             />
             <EditText
                 android:layout_width="match_parent"
+                android:textColor="#000"
                 android:layout_height="40.9dp"
                 android:id="@+id/editTextStreet"
                 android:background="@drawable/checkout_edittext_bg"
                 android:layout_marginRight="20.0dp"
                 android:layout_marginLeft="20.0dp"
-                android:layout_marginBottom="12dp"/>
+                android:layout_marginBottom="12dp"
+                android:paddingLeft="10dp"/>
 
             <TextView
                 android:text="City"
@@ -174,13 +184,15 @@
                 android:layout_marginBottom="4dp"
             />
             <EditText
+                android:textColor="#000"
                 android:layout_width="match_parent"
                 android:layout_height="40.9dp"
                 android:id="@+id/editTextCity"
                 android:background="@drawable/checkout_edittext_bg"
                 android:layout_marginRight="20.0dp"
                 android:layout_marginLeft="20.0dp"
-                android:layout_marginBottom="12dp"/>
+                android:layout_marginBottom="12dp"
+                android:paddingLeft="10dp"/>
 
 
             <TextView
@@ -196,13 +208,15 @@
                 android:layout_marginBottom="4dp"
             />
             <EditText
+                android:textColor="#000"
                 android:layout_width="match_parent"
                 android:layout_height="40.9dp"
                 android:id="@+id/editTextProvince"
                 android:background="@drawable/checkout_edittext_bg"
                 android:layout_marginRight="20.0dp"
                 android:layout_marginLeft="20.0dp"
-                android:layout_marginBottom="12dp"/>
+                android:layout_marginBottom="12dp"
+                android:paddingLeft="10dp"/>
 
 
             <TextView
@@ -218,13 +232,15 @@
                 android:layout_marginBottom="4dp"
             />
             <EditText
+                android:textColor="#000"
                 android:layout_width="match_parent"
                 android:layout_height="40.9dp"
                 android:id="@+id/editTextZip"
                 android:background="@drawable/checkout_edittext_bg"
                 android:layout_marginRight="20.0dp"
                 android:layout_marginLeft="20.0dp"
-                android:layout_marginBottom="12dp"/>
+                android:layout_marginBottom="12dp"
+                android:paddingLeft="10dp"/>
 
 
             <LinearLayout
@@ -241,8 +257,8 @@
                     android:id="@+id/buttonBack"
                     android:layout_marginRight="24dp"
                     android:background="@drawable/round_backcheckout_btn"
-                    android:textColor="#FF4818"
-                    android:layout_width="100dp"
+                    android:textColor="#fff"
+                    android:layout_width="130dp"
                     android:layout_height="50dp" 
                     />
                 <Button
@@ -252,8 +268,9 @@
                     android:id="@+id/buttonCheckout"
                     android:background="@drawable/round_cart_btn"
                     android:textColor="@android:color/white"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp" />
+                    android:layout_width="130dp"
+                    android:layout_height="50dp"
+                    />
 
 
 

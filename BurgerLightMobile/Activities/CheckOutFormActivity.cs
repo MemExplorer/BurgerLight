@@ -4,6 +4,8 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using AndroidX.AppCompat.App;
+using BurgerLightMobile.API;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +13,8 @@ using System.Text;
 
 namespace BurgerLightMobile.Activities
 {
-    [Activity(Label = "CheckOutFormActivity")]
-    public class CheckOutFormActivity : Activity
+    [Activity(Label = "Checkout Form", Theme = "@style/LoginTheme")]
+    public class CheckOutFormActivity : AppCompatActivity
     {
 
         Button btnCheckout, btnBack;
@@ -52,9 +54,31 @@ namespace BurgerLightMobile.Activities
 
         protected void btnCheckout_Click(object sender, EventArgs e)
         {
+            EditText[] arrEt = new EditText[] { etLname, etFname, etEmail, etPhoneNum, etStreet, etCity, etProvince, etZip };
+            string[] errorMsg = new string[] { "Last Name", "First Name", "Email", "Phone Number", "Street Input", "City Input", "Province Input", "Zip Code" };
+            bool errFlag = false;
+            for(int z = 0 ; z < arrEt.Length; z++)
+            {
+                arrEt[z].SetError((string)null, null);
+                if (arrEt[z].Text.Length == 0)
+                {
+                    errFlag = true;
+                    arrEt[z].Error = "Invalid " + errorMsg[z] + "!";
+                }
+            }
+
+            if (errFlag)
+                return;
             //Proceed to checkout completed activity
+            if(!BurgerLightAPI.ProcessOrder(out string eMsg))
+            {
+                Toast.MakeText(this, eMsg, ToastLength.Short).Show(); 
+                return;
+            }
 
             Intent i = new Intent(this, typeof(CheckOutCompleteActivity));
+            i.PutExtra("cartcount", this.Intent.GetStringExtra("cartcount"));
+            i.PutExtra("username", this.Intent.GetStringExtra("username"));
             StartActivity(i);
             Finish();
 

@@ -8,6 +8,7 @@ using Android.Views;
 using Android.Widget;
 using AndroidX.Fragment.App;
 using AndroidX.RecyclerView.Widget;
+using BurgerLightMobile.Activities;
 using BurgerLightMobile.API;
 using BurgerLightMobile.API.Models;
 using System;
@@ -26,6 +27,7 @@ namespace BurgerLightMobile.Fragments
         RecyclerView mRecyclerView;
         OrderListAdapter mAdapter;
         LinearLayoutManager mLayoutManager;
+        Button buttonCheckout;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -82,8 +84,23 @@ namespace BurgerLightMobile.Fragments
             mLayoutManager = new LinearLayoutManager(view.Context);
             //mLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.Vertical, false); //uncomment for gridlayout (muliple in 1 row)
             mRecyclerView.SetLayoutManager(mLayoutManager);
-
+            buttonCheckout = view.FindViewById<Button>(Resource.Id.buttonCheckout);
+            buttonCheckout.Click += ButtonCheckout_Click;
             return view;
+        }
+
+        private void ButtonCheckout_Click(object sender, EventArgs e)
+        {
+            if(mAdapter.mOrderList.Count == 0)
+            {
+                Toast.MakeText(this.Activity, "You have no items in cart!", ToastLength.Short);
+                return;
+            }
+
+            Intent i = new Intent(this.Activity, typeof(CheckOutFormActivity));
+            i.PutExtra("cartcount", this.Activity.Intent.GetStringExtra("cartcount"));
+            i.PutExtra("username", this.Activity.Intent.GetStringExtra("username"));
+            StartActivity(i);
         }
     }
 
