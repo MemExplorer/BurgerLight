@@ -15,7 +15,7 @@ namespace BurgerLightMobile.API.Models
     {
         public int id { get; set; }
         public int quantity { get; set; }
-        public int name { get; set; }
+        public string name { get; set; }
         public float price { get; set; }
     }
 }
