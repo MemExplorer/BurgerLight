@@ -19,7 +19,7 @@ namespace BurgerLightMobile
     {
         private Button LogoutBtn;
         private ImageButton CartBtn;
-        private TextView CartCount;
+        public TextView CartCount;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);

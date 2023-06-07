@@ -45,9 +45,13 @@ try {
                 $stmt->execute();
             }
 
-            if (mysqli_affected_rows($conn) > 0)
-                Response::CreateResponse(true, new AddCartResponse((int) $prodId, $sum));
-            else
+            if (mysqli_affected_rows($conn) > 0) {
+                $stmt = $conn->prepare("SELECT SUM(quantity) as total FROM tblorderlist WHERE userid = " . $currUserId);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
+                Response::CreateResponse(true, new AddCartResponse((int) $prodId, $sum, $row['total']));
+            } else
                 Response::CreateResponse(false, "Failed to update!");
 
             return;
@@ -61,7 +65,11 @@ try {
             //INSERT Entry
             $stmt = $conn->prepare("INSERT INTO tblorderlist VALUES (" . $currUserId . ", " . $prodId . ", " . $quantity . ")");
             if ($stmt->execute()) {
-                Response::CreateResponse(true, new AddCartResponse((int) $prodId, (int) $quantity));
+                $stmt = $conn->prepare("SELECT SUM(quantity) as total FROM tblorderlist WHERE userid = " . $currUserId);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
+                Response::CreateResponse(true, new AddCartResponse((int) $prodId, (int) $quantity, $row['total']));
                 return;
             }
 

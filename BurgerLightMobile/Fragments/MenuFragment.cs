@@ -143,10 +143,15 @@ namespace BurgerLightMobile.Fragments
 
         private void AddButton_Click(int id, object sender, EventArgs e)
         {
-            if(BurgerLightAPI.AddCart(id, 1, out string ErrorMessage) == null)
-                Toast.MakeText(this.AppCtx, ErrorMessage, ToastLength.Short).Show();
-            else
+            AddCartResponse cartRepsonse = BurgerLightAPI.AddCart(id, 1, out string ErrorMessage);
+            if(cartRepsonse != null)
+            {
+                MainActivity mainAct = (MainActivity)AppCtx;
+                mainAct.CartCount.Text = cartRepsonse.total.ToString();
                 Toast.MakeText(this.AppCtx, "Added item to cart", ToastLength.Short).Show();
+            }
+            else
+                Toast.MakeText(this.AppCtx, ErrorMessage, ToastLength.Short).Show();
 
         }
 

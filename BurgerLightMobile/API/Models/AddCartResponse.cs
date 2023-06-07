@@ -15,5 +15,6 @@ namespace BurgerLightMobile.API.Models
     {
         public int id { get; set; }
         public int newvalue { get; set; }
+        public int total { get; set; }
     }
 }
