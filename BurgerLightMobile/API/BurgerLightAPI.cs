@@ -20,7 +20,7 @@ namespace BurgerLightMobile.API
 {
     internal class BurgerLightAPI
     {
-        const string domain = "http://192.168.254.207";
+        const string domain = "http://192.168.101.12";
         private static CookieContainer cookieContainer = new CookieContainer();
         private static APIResponse<RetType> GetResponse<RetType>(string strResponse)
         {
@@ -145,11 +145,25 @@ namespace BurgerLightMobile.API
             return apiResp.GetResponse();
         }
 
-        public static bool ProcessOrder(out string ErrorMessage)
+        public static bool ProcessOrder(string[] userInfo, out string ErrorMessage)
         {
             ErrorMessage = string.Empty;
 
-            APIResponse<bool> apiResp = CreateAPIRequest<bool>("/controllers/ProcessOrder.php");
+            Dictionary<string, string> paramlist = new Dictionary<string, string>
+            {
+                { "lname", userInfo[0] },
+                { "fname", userInfo[1] },
+                { "email", userInfo[2] },
+                { "tel", userInfo[3] },
+
+                { "street", userInfo[4] },
+                { "city", userInfo[5]},
+                { "province", userInfo[6] },
+                { "zip", userInfo[7]},
+
+            };
+
+            APIResponse<bool> apiResp = CreateAPIRequest<bool>("/controllers/ProcessOrder.php", paramlist);
 
             if (!apiResp.success)
                 ErrorMessage = apiResp.GetError();

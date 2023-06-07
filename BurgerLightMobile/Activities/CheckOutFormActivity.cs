@@ -55,6 +55,7 @@ namespace BurgerLightMobile.Activities
         protected void btnCheckout_Click(object sender, EventArgs e)
         {
             EditText[] arrEt = new EditText[] { etLname, etFname, etEmail, etPhoneNum, etStreet, etCity, etProvince, etZip };
+            string[] arrEtStr = new string[] { etLname.Text, etFname.Text, etEmail.Text, etPhoneNum.Text, etStreet.Text, etCity.Text, etProvince.Text, etZip.Text };
             string[] errorMsg = new string[] { "Last Name", "First Name", "Email", "Phone Number", "Street Input", "City Input", "Province Input", "Zip Code" };
             bool errFlag = false;
             for(int z = 0 ; z < arrEt.Length; z++)
@@ -70,7 +71,7 @@ namespace BurgerLightMobile.Activities
             if (errFlag)
                 return;
             //Proceed to checkout completed activity
-            if(!BurgerLightAPI.ProcessOrder(out string eMsg))
+            if(!BurgerLightAPI.ProcessOrder(arrEtStr, out string eMsg))
             {
                 Toast.MakeText(this, eMsg, ToastLength.Short).Show(); 
                 return;
