@@ -4329,22 +4329,25 @@ namespace BurgerLightMobile
 			public const int useLogo = 2131231000;
 			
 			// aapt resource value: 0x7F080119
-			public const int view_offset_helper = 2131231001;
+			public const int usernameMain = 2131231001;
 			
 			// aapt resource value: 0x7F08011A
-			public const int view_tree_saved_state_registry_owner = 2131231002;
+			public const int view_offset_helper = 2131231002;
 			
 			// aapt resource value: 0x7F08011B
-			public const int visible = 2131231003;
+			public const int view_tree_saved_state_registry_owner = 2131231003;
 			
 			// aapt resource value: 0x7F08011C
-			public const int visible_removing_fragment_view_tag = 2131231004;
+			public const int visible = 2131231004;
 			
 			// aapt resource value: 0x7F08011D
-			public const int withText = 2131231005;
+			public const int visible_removing_fragment_view_tag = 2131231005;
 			
 			// aapt resource value: 0x7F08011E
-			public const int wrap_content = 2131231006;
+			public const int withText = 2131231006;
+			
+			// aapt resource value: 0x7F08011F
+			public const int wrap_content = 2131231007;
 			
 			static Id()
 			{
