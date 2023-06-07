@@ -42,6 +42,7 @@ namespace BurgerLightMobile
             CartBtn = FindViewById<ImageButton>(Resource.Id.CartBtn);
             CartBtn.Click += CartBtn_Click;
             CartCount = FindViewById<TextView>(Resource.Id.CartItemCount);
+            CartCount.Text = Intent.GetStringExtra("cartcount");
         }
 
         private void CartBtn_Click(object sender, EventArgs e)

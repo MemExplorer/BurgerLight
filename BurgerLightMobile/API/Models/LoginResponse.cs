@@ -15,5 +15,6 @@ namespace BurgerLightMobile.API.Models
     {
         public string username { get; set; }
         public string userid { get; set; }
+        public int carttotal { get; set; }
     }
 }

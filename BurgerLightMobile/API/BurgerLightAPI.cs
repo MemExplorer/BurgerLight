@@ -57,7 +57,7 @@ namespace BurgerLightMobile.API
             }
         }
 
-        public static bool LoginUser(string username, string password, out string ErrorMessage)
+        public static LoginResponse LoginUser(string username, string password, out string ErrorMessage)
         {
             ErrorMessage = string.Empty;
             Dictionary<string, string> paramlist = new Dictionary<string, string>
@@ -71,7 +71,7 @@ namespace BurgerLightMobile.API
             if (!apiResp.success)
                 ErrorMessage = apiResp.GetError();
 
-            return apiResp.success;
+            return apiResp.GetResponse();
         }
 
         public static bool RegisterUser(string username, string password, out string ErrorMessage)

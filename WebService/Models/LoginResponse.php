@@ -6,10 +6,13 @@ class LoginResponse
 
     public $userid;
 
-    function __construct($userid, $username)
+    public $carttotal;
+
+    function __construct($userid, $username, $carttotal)
     {
         $this->userid = $userid;
         $this->username = $username;
+        $this->carttotal = $carttotal;
     }
 }
 

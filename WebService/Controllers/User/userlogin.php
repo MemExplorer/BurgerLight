@@ -38,8 +38,13 @@ try {
 
 			// Verify the password
 			if ($hashedPass === $user['hashedpass']) {
+				$uid = $user['userid'];
+
+				//fetch cart total
+				$totalQuery = $conn->query("SELECT SUM(quantity) as total FROM tblorderlist WHERE userid = " . $user['userid']);
+				$row = $totalQuery->fetch_assoc();
 				// Successful login
-				$_SESSION['usersessionid'] = new LoginResponse($user['userid'], $username);
+				$_SESSION['usersessionid'] = new LoginResponse($uid, $username, $row['total']);
 				Response::CreateResponse(true, $_SESSION['usersessionid']);
 			} else {
 				// Invalid password
