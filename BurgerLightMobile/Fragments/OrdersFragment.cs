@@ -10,7 +10,6 @@ using AndroidX.Fragment.App;
 using AndroidX.RecyclerView.Widget;
 using BurgerLightMobile.API;
 using BurgerLightMobile.API.Models;
-using BurgerLightMobile.Fragments.Orders;
 using System;
 using System.Collections.Generic;
 using System.Linq;

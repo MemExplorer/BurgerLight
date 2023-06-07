@@ -53,16 +53,17 @@ namespace BurgerLightMobile.Activities
         protected void btnCheckout_Click(object sender, EventArgs e)
         {
             //Proceed to checkout completed activity
-            
 
+            Intent i = new Intent(this, typeof(CheckOutCompleteActivity));
+            StartActivity(i);
+            Finish();
 
         }
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
             //Back to Main
-            Intent t = new Intent(this, typeof(MainActivity));
-            StartActivity(t);
+            Finish();
 
         }
 

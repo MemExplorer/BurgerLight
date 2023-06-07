@@ -30,6 +30,7 @@ namespace BurgerLightMobile.Activities
             //Back to Main
             Intent t = new Intent(this, typeof(MainActivity));
             StartActivity(t);
+            Finish();
 
         }
     }
