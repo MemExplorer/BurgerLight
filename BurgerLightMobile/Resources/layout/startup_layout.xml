@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <ImageView
+                android:src="@drawable/logo_burger_light"
+                android:layout_width="35dp"
+                android:layout_height="match_parent"
+                android:minWidth="25dp"
+                android:minHeight="25dp"
+                android:layout_marginRight="5dp"
+                android:id="@+id/imageView1" />
+            <TextView
+                android:text="BurgerLight"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textSize="28dp"
+                android:id="@+id/textView1" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:src="@drawable/hamburgers"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:minWidth="150dp"
+                android:minHeight="150dp"
+                android:id="@+id/imageView2" />
+             <TextView
+                android:text="Yummy in Every Bite!"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingBottom="25dp"
+                android:id="@+id/textView2" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="bottom"
+            android:layout_marginBottom="20dp">
+            <Button
+                android:text="Create Account"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_redbutton"
+                android:id="@+id/createaccBtn" />
+            <Button
+                android:text="Login"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/rounded_secondarybutton"
+                android:id="@+id/loginbutton" />
+            <TextView
+                android:text="Created by Group 6 - B54"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/textView3" />
+
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
+
