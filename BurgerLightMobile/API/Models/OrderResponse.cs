@@ -11,10 +11,11 @@ using System.Text;
 
 namespace BurgerLightMobile.API.Models
 {
-    internal class LoginResponse
+    internal class OrderResponse
     {
-        public string username { get; set; }
-        public string userid { get; set; }
-        public int carttotal { get; set; }
+        public int id { get; set; }
+        public int quantity { get; set; }
+        public string name { get; set; }
+        public float price { get; set; }
     }
 }

@@ -12,7 +12,7 @@ try {
     }
 
     $currUserId = Utils::FixSessionObject($_SESSION['usersessionid'])['userid'];
-    $stmt = $conn->prepare("SELECT prodId, quantity FROM tblorderlist WHERE userid = '" . $currUserId . "'");
+    $stmt = $conn->prepare("SELECT a.prodId, a.quantity, b.prodName, b.price FROM tblorderlist a INNER JOIN tblmenulist b ON a.prodId = b.prodId WHERE userid = '" . $currUserId . "'");
     $stmt->execute();
 
     $result = $stmt->get_result();
@@ -21,7 +21,7 @@ try {
     // Check if the user exists
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-            $menuitem = new OrderResponse($row['prodId'], $row['quantity']);
+            $menuitem = new OrderResponse($row['prodId'], $row['quantity'], $row['prodName'], $row['price']);
 
             //append data to menulist
             $menulist[] = $menuitem;

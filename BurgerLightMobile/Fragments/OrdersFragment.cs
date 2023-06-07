@@ -8,18 +8,22 @@ using Android.Views;
 using Android.Widget;
 using AndroidX.Fragment.App;
 using AndroidX.RecyclerView.Widget;
+using BurgerLightMobile.API;
+using BurgerLightMobile.API.Models;
 using BurgerLightMobile.Fragments.Orders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace BurgerLightMobile.Fragments
 {
     public class OrdersFragment : AndroidX.Fragment.App.Fragment
     {
 
-        OrderList mOrderList;
+        List<OrderResponse> mOrderList;
         RecyclerView mRecyclerView;
         OrderListAdapter mAdapter;
         LinearLayoutManager mLayoutManager;
@@ -31,6 +35,32 @@ namespace BurgerLightMobile.Fragments
             // Create your fragment here
         }
 
+        public override void OnStart()
+        {
+            base.OnStart();
+            UpdateItems();
+        }
+
+        private async void UpdateItems()
+        {
+            await Task.Run(() => {
+
+                this.Activity.RunOnUiThread(() => {
+                    mOrderList = BurgerLightAPI.FetchOrders(out string eMsg);
+                    if (mOrderList == null)
+                    {
+                        Toast.MakeText(this.Activity.ApplicationContext, eMsg, ToastLength.Short);
+                        return;
+                    }
+
+                    mAdapter.mOrderList = mOrderList.ToDictionary(x => x.id);
+                    mAdapter.NotifyDataSetChanged();
+
+                });
+
+            });
+        }
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
          
@@ -39,10 +69,10 @@ namespace BurgerLightMobile.Fragments
 
             //Populate mProductList here for RecyclerView
             //ProductList has temporary built in products
-            mOrderList = new OrderList();
+            mOrderList = new List<OrderResponse>();
 
             // Instantiate the adapter and pass in its data source:
-            mAdapter = new OrderListAdapter(mOrderList);
+            mAdapter = new OrderListAdapter(mOrderList, this.Context);
 
             // Get our RecyclerView layout:
             mRecyclerView = view.FindViewById<RecyclerView>(Resource.Id.recyclerViewOrders);
@@ -75,7 +105,9 @@ namespace BurgerLightMobile.Fragments
         public Button MinusButton { get; private set; }
         public Button DeleteButton { get; private set; }
         public TextView QuantityTextView { get; private set; }
-
+        public TextView TotalTextView { get; private set; }
+        public TextView CartCount { get; private set; }
+        public TextView TotalTextStr { get; private set; }
 
 
         public OrderViewHolder(View itemView, Action<int> listener) : base(itemView)
@@ -92,7 +124,10 @@ namespace BurgerLightMobile.Fragments
             DeleteButton = itemView.FindViewById<Button>(Resource.Id.buttonDelete);
             QuantityTextView = itemView.FindViewById<TextView>(Resource.Id.textViewQty);
 
-
+            Activity act = (Activity)itemView.Context;
+            TotalTextView = act.FindViewById<TextView>(Resource.Id.orderTotal);
+            TotalTextStr = act.FindViewById<TextView>(Resource.Id.totalTxt);
+            CartCount = act.FindViewById<TextView>(Resource.Id.CartItemCount);
 
             // Detect user clicks on the item view and report which item
             // was clicked (by layout position) to the listener:
@@ -108,20 +143,40 @@ namespace BurgerLightMobile.Fragments
 
     // Adapter to connect the data set (Product List) to the RecyclerView: 
 
-    public class OrderListAdapter : RecyclerView.Adapter
+    internal class OrderUIUpdater
+    {
+        public OrderResponse OrderResponse { get; set; }
+        public TextView QuantityTextView { get; private set; }
+        public TextView TotalTextView { get; private set; }
+        public TextView CartCount { get; private set; }
+        public TextView TotalTextStr { get; private set; }
+
+        public OrderUIUpdater(OrderResponse orderResponse, TextView quantityTextView, TextView totalTextView, TextView cartCount, TextView totalTextStr)
+        {
+            OrderResponse = orderResponse;
+            QuantityTextView = quantityTextView;
+            TotalTextView = totalTextView;
+            CartCount = cartCount;
+            TotalTextStr = totalTextStr;
+        }
+    }
+
+    internal class OrderListAdapter : RecyclerView.Adapter
     {
         public event EventHandler<int> ItemClick;
 
-        OrderList mOrderList;
+        public Dictionary<int, OrderResponse> mOrderList;
 
-        public OrderListAdapter(OrderList productList)
+        Context AppCtx;
+        public OrderListAdapter(List<OrderResponse> productList, Context appCtx)
         {
-            mOrderList = productList;
+            mOrderList = productList.ToDictionary(x => x.id);
+            AppCtx = appCtx;
         }
 
         public override int ItemCount
         {
-            get { return mOrderList.ProductListCount; }
+            get { return mOrderList.Count; }
         }
 
 
@@ -130,17 +185,18 @@ namespace BurgerLightMobile.Fragments
         {
             OrderViewHolder vh = holder as OrderViewHolder;
 
-           
-            vh.Caption.Text = mOrderList[position].ProductName;
-
+            OrderResponse currOrderResp = mOrderList.ElementAt(position).Value;
+            OrderUIUpdater u = new OrderUIUpdater(currOrderResp, vh.QuantityTextView, vh.TotalTextView, vh.CartCount, vh.TotalTextStr);
+            vh.Caption.Text = currOrderResp.name;
+            vh.Price.Text = "P " + currOrderResp.price.ToString("n2");
             //set order quantity here
-            vh.QuantityTextView.Text = mOrderList[position].OrderQuantity.ToString();
-
+            vh.QuantityTextView.Text = currOrderResp.quantity.ToString();
+            UpdateOrderUI(u);
             // Set the ImageView and TextView in this ViewHolder's CardView 
             // from this position in the Product List:
             try
             {
-                vh.Image.SetImageResource(mOrderList[position].PhotoId);
+                vh.Image.SetImageResource(Resource.Drawable.burger);
             }
             catch
             {
@@ -148,27 +204,79 @@ namespace BurgerLightMobile.Fragments
                 vh.Image.SetImageResource(Resource.Drawable.burger);
             }
 
-
             ///////////SET OnClick of Button in Recycler View HERE
-            string strProductToast = String.Format("Pressed on Product: {0}", mOrderList[position].ProductName);
-            vh.PlusButton.Click += (sender, e) =>
-            {
-                //Should Add Quantity here
-                vh.QuantityTextView.Text = (int.Parse(vh.QuantityTextView.Text) + 1).ToString(); //FOR TESTING ONLY
-            };
+            vh.PlusButton.Click += (s, e) => PlusButton_Click(s, e, u);
+            vh.MinusButton.Click += (s, e) => MinusButton_Click(s, e, u);
+            vh.DeleteButton.Click += (s, e) => DeleteButton_Click(s, e, u);
+            DestroySubscribers(vh.PlusButton);
+            DestroySubscribers(vh.MinusButton);
+            DestroySubscribers(vh.DeleteButton);
+        }
 
-            vh.MinusButton.Click += (sender, e) =>
+        //hack to destroy duplicate delegate subscribers. Made by yours truly :)
+        private void DestroySubscribers(Button b)
+        {
+            Android.Views.View v = b;
+            var field = typeof(View).GetField("weak_implementor_SetOnClickListener", BindingFlags.NonPublic | BindingFlags.Instance);
+            Type internalOnclickImpl = typeof(Android.Views.View).GetNestedType("IOnClickListenerImplementor", BindingFlags.NonPublic);
+            var onClickImplHandlerField = internalOnclickImpl.GetField("Handler", BindingFlags.Public | BindingFlags.Instance);
+            var refInstance = (System.WeakReference)field.GetValue(v);
+            if (refInstance == null)
             {
-                //Should Minus Quantity here
-                if(vh.QuantityTextView.Text != "0") vh.QuantityTextView.Text = (int.Parse(vh.QuantityTextView.Text) - 1).ToString(); //FOR TESTING ONLY
-            };
+                return;
+            }
 
-            vh.DeleteButton.Click += (sender, e) =>
+            var OnClickImpl = refInstance.Target;
+            var multicastDelInfo = (MulticastDelegate)onClickImplHandlerField.GetValue(OnClickImpl);
+            var delegateListField = typeof(MulticastDelegate).GetField("delegates", BindingFlags.NonPublic | BindingFlags.Instance);
+
+            //get rid of all subscribed events
+            var handlerList = multicastDelInfo.GetInvocationList();
+            if (handlerList.Length > 1)
+                delegateListField.SetValue(multicastDelInfo, new Delegate[] {handlerList.Last()});
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e, OrderUIUpdater u)
+        {
+            APIUpdateCart(-u.OrderResponse.quantity, u);
+        }
+
+        private void MinusButton_Click(object sender, EventArgs e, OrderUIUpdater u)
+        {
+            APIUpdateCart(-1, u);
+        }
+
+        private void PlusButton_Click(object sender, EventArgs e, OrderUIUpdater u)
+        {
+            APIUpdateCart(1, u);
+        }
+
+        private void APIUpdateCart(int val, OrderUIUpdater u)
+        {
+            AddCartResponse resp = BurgerLightAPI.AddCart(u.OrderResponse.id, val, out string eMsg);
+            if(resp != null)
             {
-                //Delete button here
-                Toast.MakeText(Application.Context, strProductToast, ToastLength.Long).Show();
-            };
+                u.QuantityTextView.Text = resp.newvalue.ToString();
+                mOrderList[u.OrderResponse.id].quantity = resp.newvalue;
+                UpdateOrderUI(u);
 
+                if(resp.newvalue == 0)
+                {
+                    mOrderList.Remove(u.OrderResponse.id);
+                    this.NotifyDataSetChanged();
+                }
+            }
+            else
+                Toast.MakeText(this.AppCtx, eMsg, ToastLength.Short).Show();
+        }
+
+        private void UpdateOrderUI(OrderUIUpdater u)
+        {
+            u.TotalTextView.Text = "P " + mOrderList.Sum(x => x.Value.price * x.Value.quantity).ToString("n2");
+
+            string totalQ = mOrderList.Sum(x => x.Value.quantity).ToString();
+            u.CartCount.Text = totalQ;
+            u.TotalTextStr.Text = "TOTAL (" + totalQ + ")";
         }
 
         // Create a new Product CardView (invoked by the layout manager): 

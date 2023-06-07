@@ -19,7 +19,8 @@ namespace BurgerLightMobile
     {
         private Button LogoutBtn;
         private ImageButton CartBtn;
-        private TextView CartCount;
+        public TextView CartCount;
+        public TextView usernameTxtView;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -42,6 +43,11 @@ namespace BurgerLightMobile
             CartBtn = FindViewById<ImageButton>(Resource.Id.CartBtn);
             CartBtn.Click += CartBtn_Click;
             CartCount = FindViewById<TextView>(Resource.Id.CartItemCount);
+            CartCount.Text = Intent.GetStringExtra("cartcount");
+
+            View headerView = navigationView.GetHeaderView(0);
+            usernameTxtView = headerView.FindViewById<TextView>(Resource.Id.usernameMain);
+            usernameTxtView.Text = Intent.GetStringExtra("username");
         }
 
         private void CartBtn_Click(object sender, EventArgs e)

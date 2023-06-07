@@ -57,7 +57,7 @@ namespace BurgerLightMobile.API
             }
         }
 
-        public static bool LoginUser(string username, string password, out string ErrorMessage)
+        public static LoginResponse LoginUser(string username, string password, out string ErrorMessage)
         {
             ErrorMessage = string.Empty;
             Dictionary<string, string> paramlist = new Dictionary<string, string>
@@ -71,7 +71,7 @@ namespace BurgerLightMobile.API
             if (!apiResp.success)
                 ErrorMessage = apiResp.GetError();
 
-            return apiResp.success;
+            return apiResp.GetResponse();
         }
 
         public static bool RegisterUser(string username, string password, out string ErrorMessage)
@@ -126,6 +126,18 @@ namespace BurgerLightMobile.API
             };
 
             APIResponse<AddCartResponse> apiResp = CreateAPIRequest<AddCartResponse>("/controllers/AddCart.php", paramlist);
+
+            if (!apiResp.success)
+                ErrorMessage = apiResp.GetError();
+
+            return apiResp.GetResponse();
+        }
+
+        public static List<OrderResponse> FetchOrders(out string ErrorMessage)
+        {
+            ErrorMessage = string.Empty;
+
+            APIResponse<List<OrderResponse>> apiResp = CreateAPIRequest<List<OrderResponse>>("/controllers/FetchOrders.php");
 
             if (!apiResp.success)
                 ErrorMessage = apiResp.GetError();

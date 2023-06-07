@@ -7,6 +7,7 @@ using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using BurgerLightMobile.API;
+using BurgerLightMobile.API.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -81,13 +82,16 @@ namespace BurgerLightMobile.Activities
 
         private void LoginBtn_Click(object sender, EventArgs e)
         {
-            if(BurgerLightAPI.LoginUser(usernameText.Text, passwordEditText.Text, out string eMsg))
+            LoginResponse r = BurgerLightAPI.LoginUser(usernameText.Text.ToLower(), passwordEditText.Text, out string eMsg);
+            if (r != null)
             {
                 //start main app
                 usernameText.Text = string.Empty;
                 passwordEditText.Text = string.Empty;
                 loggedIn = true;
                 Intent t = new Intent(this, typeof(MainActivity));
+                t.PutExtra("cartcount", r.carttotal.ToString());
+                t.PutExtra("username", r.username.ToLower());
                 StartActivity(t);
                 return;
             }

@@ -52,7 +52,7 @@ namespace BurgerLightMobile.Activities
                 return;
             }
 
-            if(BurgerLightAPI.RegisterUser(usernameTxt.Text, passwordTxt.Text, out string eMsg))
+            if(BurgerLightAPI.RegisterUser(usernameTxt.Text.ToLower(), passwordTxt.Text, out string eMsg))
             {
                 Toast.MakeText(this, "Successfully registered user!", ToastLength.Short).Show();
                 var intent = new Intent(this, typeof(LoginActivity));
