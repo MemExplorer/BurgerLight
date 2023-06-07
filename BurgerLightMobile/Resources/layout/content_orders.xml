@@ -36,7 +36,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="208.0dp"
+        android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:showIn="@layout/app_bar_main"
         android:layout_gravity="bottom"
@@ -44,6 +44,30 @@
         android:layout_marginTop="24dp"
         >
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="50dp">
+
+            <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_marginLeft="25dp"
+            android:layout_marginBottom="50dp"
+            android:textColor="#FF4818"
+                android:text="TOTAL"/>
+
+        <TextView
+        android:id="@+id/orderTotal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_marginRight="35dp"
+        android:textColor="#FF4818"
+        android:textAlignment="viewEnd"
+            android:text="P 420"/>
+        </RelativeLayout>
         <TextView
             android:text="Order Instruction"
             android:textAppearance="?android:attr/textAppearanceLarge"
@@ -56,14 +80,14 @@
         />
 
 
-        <EditText
-            android:inputType="textMultiLine"
-            android:layout_width="match_parent"
-            android:layout_height="80.0dp"
-            android:id="@+id/editTextInstruction"
-            android:background="@drawable/edittext_order_bg"
-            android:layout_marginRight="35.0dp"
-            android:layout_marginLeft="35.0dp" 
+            <EditText
+                android:inputType="textMultiLine"
+                android:layout_width="match_parent"
+                android:layout_height="80.0dp"
+                android:id="@+id/editTextInstruction"
+                android:background="@drawable/edittext_order_bg"
+                android:layout_marginRight="35.0dp"
+                android:layout_marginLeft="35.0dp" 
         />
         <Button
             android:text="Checkout"
