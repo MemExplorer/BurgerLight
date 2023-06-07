@@ -42,9 +42,13 @@ namespace BurgerLightMobile.Fragments
             //Populate mProductList here for RecyclerView
             //ProductList has temporary built in products
             mProductList = BurgerLightAPI.FetchMenu(out string eMsg);
-
+            if(mProductList == null)
+            {
+                Toast.MakeText(this.Activity.ApplicationContext, eMsg, ToastLength.Short);
+                return view;
+            }
             // Instantiate the adapter and pass in its data source:
-            mAdapter = new ProductListAdapter(mProductList);
+            mAdapter = new ProductListAdapter(mProductList, this.Context);
 
             // Get our RecyclerView layout:
             mRecyclerView = view.FindViewById<RecyclerView>(Resource.Id.recyclerView1);
@@ -105,10 +109,12 @@ namespace BurgerLightMobile.Fragments
         public event EventHandler<int> ItemClick;
 
         List<MenuResponse> mProductList;
+        Context AppCtx;
 
-        public ProductListAdapter(List<MenuResponse> productList)
+        public ProductListAdapter(List<MenuResponse> productList, Context appCtx)
         {
             mProductList = productList;
+            AppCtx = appCtx;
         }
 
         public override int ItemCount
@@ -127,7 +133,7 @@ namespace BurgerLightMobile.Fragments
             vh.Image.SetImageResource(Resource.Drawable.burger); //temo value
             vh.Caption.Text = mProductList[position].name;
             vh.Price.Text = "P" + mProductList[position].price.ToString("n2");
-
+            
             ///////////SET OnClick of Button in Recycler View HERE
             string strProductToast = String.Format("Pressed on Product: {0}", mProductList[position].name);
             vh.AddButton.Click += (s, e) => AddButton_Click(mProductList[position].id, s, e);
@@ -137,7 +143,11 @@ namespace BurgerLightMobile.Fragments
 
         private void AddButton_Click(int id, object sender, EventArgs e)
         {
-            //add cart api
+            if(BurgerLightAPI.AddCart(id, 1, out string ErrorMessage) == null)
+                Toast.MakeText(this.AppCtx, ErrorMessage, ToastLength.Short).Show();
+            else
+                Toast.MakeText(this.AppCtx, "Added item to cart", ToastLength.Short).Show();
+
         }
 
         // Create a new Product CardView (invoked by the layout manager): 
