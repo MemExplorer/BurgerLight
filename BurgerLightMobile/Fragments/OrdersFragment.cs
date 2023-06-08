@@ -17,6 +17,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using static AndroidX.RecyclerView.Widget.RecyclerView;
 
 namespace BurgerLightMobile.Fragments
 {
@@ -50,7 +51,17 @@ namespace BurgerLightMobile.Fragments
                     mOrderList = BurgerLightAPI.FetchOrders(out string eMsg);
                     if (mOrderList == null)
                     {
-                        Toast.MakeText(this.Activity.ApplicationContext, eMsg, ToastLength.Short);
+                        //Set to default values
+                        Activity act = (Activity)this.Activity;
+                        var TotalTextView = act.FindViewById<TextView>(Resource.Id.orderTotal);
+                        var TotalTextStr = act.FindViewById<TextView>(Resource.Id.totalTxt);
+                        var CartCount = act.FindViewById<TextView>(Resource.Id.CartItemCount);
+                        CartCount.Text = "0";
+                        TotalTextView.Text = "P 0.00";
+                        TotalTextStr.Text = "TOTAL (0)";
+
+                        mAdapter.mOrderList.Clear();
+                        mAdapter.NotifyDataSetChanged();
                         return;
                     }
 
