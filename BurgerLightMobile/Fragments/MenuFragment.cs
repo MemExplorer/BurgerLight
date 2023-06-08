@@ -37,15 +37,14 @@ namespace BurgerLightMobile.Fragments
             await Task.Run(() => {
 
                 this.Activity.RunOnUiThread(() => {
-                    mProductList = BurgerLightAPI.FetchMenu(out string eMsg);
-                    if (mProductList == null)
+                    if(BurgerLightAPI.FetchMenu(out APIResponse<List<MenuResponse>> r))
                     {
-                        Toast.MakeText(this.Activity.ApplicationContext, eMsg, ToastLength.Short);
+                        mAdapter.mProductList = r.GetResponse();
+                        mAdapter.NotifyDataSetChanged();
                         return;
                     }
 
-                    mAdapter.mProductList = mProductList;
-                    mAdapter.NotifyDataSetChanged();
+                    Toast.MakeText(this.Activity, r.GetMessage(), ToastLength.Short);
 
                 });
             
@@ -168,16 +167,16 @@ namespace BurgerLightMobile.Fragments
 
         private void AddButton_Click(int id, object sender, EventArgs e)
         {
-            AddCartResponse cartRepsonse = BurgerLightAPI.AddCart(id, 1, out string ErrorMessage);
-            if(cartRepsonse != null)
+            if(BurgerLightAPI.AddCart(id, 1, out APIResponse<AddCartResponse> r))
             {
+                AddCartResponse addCartResponse = r.GetResponse();
                 MainActivity mainAct = (MainActivity)AppCtx;
-                mainAct.CartCount.Text = cartRepsonse.total.ToString();
+                mainAct.CartCount.Text = addCartResponse.total.ToString();
                 Toast.MakeText(this.AppCtx, "Added item to cart", ToastLength.Short).Show();
+                return;
             }
-            else
-                Toast.MakeText(this.AppCtx, ErrorMessage, ToastLength.Short).Show();
 
+            Toast.MakeText(this.AppCtx, r.GetMessage(), ToastLength.Short).Show();
         }
 
         // Create a new Product CardView (invoked by the layout manager): 

@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using BurgerLightMobile.API;
+using BurgerLightMobile.API.Models;
 using System;
 
 namespace BurgerLightMobile.Activities
@@ -66,9 +67,9 @@ namespace BurgerLightMobile.Activities
             if (errFlag)
                 return;
             //Proceed to checkout completed activity
-            if(!BurgerLightAPI.ProcessOrder(arrEtStr, out string eMsg))
+            if(!BurgerLightAPI.ProcessOrder(arrEtStr, out APIResponse<string> r))
             {
-                Toast.MakeText(this, eMsg, ToastLength.Short).Show(); 
+                Toast.MakeText(this, r.GetMessage(), ToastLength.Short).Show(); 
                 return;
             }
 

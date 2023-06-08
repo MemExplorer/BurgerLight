@@ -7,7 +7,7 @@ include_once('../utils.php');
 try {
 
     if (!isset($_SESSION['usersessionid'])) {
-        Response::CreateResponse(false, "Session not found!");
+        Response::CreateResponse(false, "Session not found!", null);
         return;
     }
 
@@ -17,19 +17,20 @@ try {
 
     $result = $stmt->get_result();
 
-    $menulist = [];
+    $orderlist = [];
     // Check if the user exists
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-            $menuitem = new OrderResponse($row['prodId'], $row['quantity'], $row['prodName'], $row['price']);
+            $orderitem = new OrderResponse($row['prodId'], $row['quantity'], $row['prodName'], $row['price']);
 
-            //append data to menulist
-            $menulist[] = $menuitem;
+            //append data to orderlist
+            $orderlist[] = $orderitem;
         }
-
-        Response::CreateResponse(true, $menulist);
+        Response::CreateResponse(true, "Success", $orderlist);
     } else
-        Response::CreateResponse(false, "Failed to fetch the menu!");
+        Response::CreateResponse(false, "No items in cart.", $orderlist);
+
+
 
 } finally {
     $conn->close();

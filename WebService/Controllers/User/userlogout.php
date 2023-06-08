@@ -9,10 +9,10 @@ try {
     // Destroy the session
     session_destroy();
 
-    Response::CreateResponse(true, "Successfully logged out!");
+    Response::CreateResponse(true, "Successfully logged out!", "Successfully logged out!");
     return;
 } catch (Exception $e) {
 
 }
-Response::CreateResponse(false, "Failed to logout!");
+Response::CreateResponse(false, "Failed to logout!", null);
 ?>

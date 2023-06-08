@@ -11,17 +11,8 @@ namespace BurgerLightMobile.API
 {
     internal class BurgerLightAPI
     {
-        const string domain = "http://192.168.101.12";
+        const string domain = "http://192.168.254.207";
         private static CookieContainer cookieContainer = new CookieContainer();
-        private static APIResponse<RetType> GetResponse<RetType>(string strResponse)
-        {
-            JObject obj = (JObject)JsonConvert.DeserializeObject(strResponse);
-            APIResponse<RetType> i = new APIResponse<RetType>();
-            i.success = (bool)obj["success"];
-            i.response = obj["response"].ToString();
-            return i;
-        }
-
         private static APIResponse<RetType> CreateAPIRequest<RetType>(string path, Dictionary<string, string> paramList = null)
         {
             string url = domain + path;
@@ -39,7 +30,7 @@ namespace BurgerLightMobile.API
                 using (StreamReader reader = new StreamReader(response.GetResponseStream()))
                 {
                     string responsestr = reader.ReadToEnd();
-                    return GetResponse<RetType>(responsestr);
+                    return JsonConvert.DeserializeObject<APIResponse<RetType>>(responsestr);
                 }
             }
             catch
@@ -48,98 +39,69 @@ namespace BurgerLightMobile.API
             }
         }
 
-        public static LoginResponse LoginUser(string username, string password, out string ErrorMessage)
+        public static bool LoginUser(string username, string password, out APIResponse<LoginResponse> Response)
         {
-            ErrorMessage = string.Empty;
             Dictionary<string, string> paramlist = new Dictionary<string, string>
             {
                 { "usrnm", username },
                 { "pswd", password }
             };
 
-            APIResponse<LoginResponse> apiResp = CreateAPIRequest<LoginResponse>("/controllers/user/userlogin.php", paramlist);
+            Response = CreateAPIRequest<LoginResponse>("/controllers/user/userlogin.php", paramlist);
 
-            if (!apiResp.success)
-                ErrorMessage = apiResp.GetError();
-
-            return apiResp.GetResponse();
+            return Response != null && Response.success;
         }
 
-        public static bool RegisterUser(string username, string password, out string ErrorMessage)
+        public static bool RegisterUser(string username, string password, out APIResponse<string> Response)
         {
-            ErrorMessage = string.Empty;
             Dictionary<string, string> paramlist = new Dictionary<string, string>
             {
                 { "usrnm", username },
                 { "pswd", password }
             };
 
-            APIResponse<string> apiResp = CreateAPIRequest<string>("/controllers/user/userregister.php", paramlist);
+            Response = CreateAPIRequest<string>("/controllers/user/userregister.php", paramlist);
 
-            if (!apiResp.success)
-                ErrorMessage = apiResp.GetError();
-
-            return apiResp.success;
+            return Response != null && Response.success;
         }
 
-        public static bool LogoutUser(out string ErrorMessage)
+        public static bool LogoutUser(out APIResponse<string> Response)
         {
-            ErrorMessage = string.Empty;
+            Response = CreateAPIRequest<string>("/controllers/user/userlogout.php");
 
-            APIResponse<string> apiResp = CreateAPIRequest<string>("/controllers/user/userlogout.php");
-
-            if (!apiResp.success)
-                ErrorMessage = apiResp.GetError();
-
-            return apiResp.success;
+            return Response != null && Response.success;
 
         }
 
-        public static List<MenuResponse> FetchMenu(out string ErrorMessage)
+        public static bool FetchMenu(out APIResponse<List<MenuResponse>> Response)
         {
-            ErrorMessage = string.Empty;
+            Response = CreateAPIRequest<List<MenuResponse>>("/controllers/GetMenu.php");
 
-            APIResponse<List<MenuResponse>> apiResp = CreateAPIRequest<List<MenuResponse>>("/controllers/GetMenu.php");
-
-            if (!apiResp.success)
-                ErrorMessage = apiResp.GetError();
-
-            return apiResp.GetResponse();
+            return Response != null && Response.success;
         }
 
-        public static AddCartResponse AddCart(int id, int q, out string ErrorMessage)
+        public static bool AddCart(int id, int q, out APIResponse<AddCartResponse> Response)
         {
-            ErrorMessage = string.Empty;
             Dictionary<string, string> paramlist = new Dictionary<string, string>
             {
                 { "id", id.ToString() },
                 { "q", q.ToString() }
             };
 
-            APIResponse<AddCartResponse> apiResp = CreateAPIRequest<AddCartResponse>("/controllers/AddCart.php", paramlist);
+            Response = CreateAPIRequest<AddCartResponse>("/controllers/AddCart.php", paramlist);
 
-            if (!apiResp.success)
-                ErrorMessage = apiResp.GetError();
-
-            return apiResp.GetResponse();
+            return Response != null && Response.success;
         }
 
-        public static List<OrderResponse> FetchOrders(out string ErrorMessage)
+        public static bool FetchOrders(out APIResponse<List<OrderResponse>> Response)
         {
-            ErrorMessage = string.Empty;
+            Response = CreateAPIRequest<List<OrderResponse>>("/controllers/FetchOrders.php");
 
-            APIResponse<List<OrderResponse>> apiResp = CreateAPIRequest<List<OrderResponse>>("/controllers/FetchOrders.php");
-
-            if (!apiResp.success)
-                ErrorMessage = apiResp.GetError();
-
-            return apiResp.GetResponse();
+            return Response != null && Response.success;
         }
 
-        public static bool ProcessOrder(string[] userInfo, out string ErrorMessage)
+        public static bool ProcessOrder(string[] userInfo, out APIResponse<string> Response)
         {
-            ErrorMessage = string.Empty;
-
             Dictionary<string, string> paramlist = new Dictionary<string, string>
             {
                 { "lname", userInfo[0] },
@@ -154,12 +116,10 @@ namespace BurgerLightMobile.API
 
             };
 
-            APIResponse<bool> apiResp = CreateAPIRequest<bool>("/controllers/ProcessOrder.php", paramlist);
+            Response = CreateAPIRequest<string>("/controllers/ProcessOrder.php", paramlist);
 
-            if (!apiResp.success)
-                ErrorMessage = apiResp.GetError();
 
-            return apiResp.success;
+            return Response != null && Response.success;
         }
     }
 }

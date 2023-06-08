@@ -8,7 +8,7 @@ try {
 
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         if (!isset($_SESSION['usersessionid'])) {
-            Response::CreateResponse(false, "Session not found!");
+            Response::CreateResponse(false, "Session not found!", null);
             return;
         }
 
@@ -16,7 +16,7 @@ try {
         $quantity = $_GET['q'];
 
         if (!Utils::ValidateInt($prodId) || !Utils::ValidateInt($quantity)) {
-            Response::CreateResponse(false, "Invalid input value!");
+            Response::CreateResponse(false, "Invalid input value!", null);
             return;
         }
 
@@ -33,7 +33,7 @@ try {
             $row = $result->fetch_assoc();
             $sum = $row['quantity'] + $intQuantity;
             if ($intQuantity === 0 || ($intQuantity < 0 && $sum < 0)) {
-                Response::CreateResponse(false, "Invalid quantity value!");
+                Response::CreateResponse(false, "Invalid quantity value!", null);
                 return;
             }
 
@@ -51,15 +51,15 @@ try {
                 $q = $row['total'];
                 if (!Utils::ValidateInt($q))
                     $q = 0;
-                Response::CreateResponse(true, new AddCartResponse((int) $prodId, $sum, $q));
+                Response::CreateResponse(true, "Success", new AddCartResponse((int) $prodId, $sum, $q));
             } else
-                Response::CreateResponse(false, "Failed to update!");
+                Response::CreateResponse(false, "Failed to update!", null);
 
             return;
         } else {
 
             if ($intQuantity <= 0) {
-                Response::CreateResponse(false, "Invalid quantity value!");
+                Response::CreateResponse(false, "Invalid quantity value!", null);
                 return;
             }
 
@@ -72,15 +72,15 @@ try {
                 if (!Utils::ValidateInt($q))
                     $q = 0;
 
-                Response::CreateResponse(true, new AddCartResponse((int) $prodId, (int) $quantity, $q));
+                Response::CreateResponse(true, "Success", new AddCartResponse((int) $prodId, (int) $quantity, $q));
                 return;
             }
 
         }
 
-        Response::CreateResponse(false, "Failed adding item to cart!");
+        Response::CreateResponse(false, "Failed adding item to cart!", null);
     } else
-        Response::CreateResponse(false, "Invalid Request!");
+        Response::CreateResponse(false, "Invalid Request!", null);
 } finally {
     $conn->close();
 }
