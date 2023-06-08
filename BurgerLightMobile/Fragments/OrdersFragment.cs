@@ -8,15 +8,16 @@ using Android.Views;
 using Android.Widget;
 using AndroidX.Fragment.App;
 using AndroidX.RecyclerView.Widget;
+using BurgerLightMobile.Activities;
 using BurgerLightMobile.API;
 using BurgerLightMobile.API.Models;
-using BurgerLightMobile.Fragments.Orders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using static AndroidX.RecyclerView.Widget.RecyclerView;
 
 namespace BurgerLightMobile.Fragments
 {
@@ -27,6 +28,7 @@ namespace BurgerLightMobile.Fragments
         RecyclerView mRecyclerView;
         OrderListAdapter mAdapter;
         LinearLayoutManager mLayoutManager;
+        Button buttonCheckout;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -49,7 +51,17 @@ namespace BurgerLightMobile.Fragments
                     mOrderList = BurgerLightAPI.FetchOrders(out string eMsg);
                     if (mOrderList == null)
                     {
-                        Toast.MakeText(this.Activity.ApplicationContext, eMsg, ToastLength.Short);
+                        //Set to default values
+                        Activity act = (Activity)this.Activity;
+                        var TotalTextView = act.FindViewById<TextView>(Resource.Id.orderTotal);
+                        var TotalTextStr = act.FindViewById<TextView>(Resource.Id.totalTxt);
+                        var CartCount = act.FindViewById<TextView>(Resource.Id.CartItemCount);
+                        CartCount.Text = "0";
+                        TotalTextView.Text = "P 0.00";
+                        TotalTextStr.Text = "TOTAL (0)";
+
+                        mAdapter.mOrderList.Clear();
+                        mAdapter.NotifyDataSetChanged();
                         return;
                     }
 
@@ -83,8 +95,23 @@ namespace BurgerLightMobile.Fragments
             mLayoutManager = new LinearLayoutManager(view.Context);
             //mLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.Vertical, false); //uncomment for gridlayout (muliple in 1 row)
             mRecyclerView.SetLayoutManager(mLayoutManager);
-
+            buttonCheckout = view.FindViewById<Button>(Resource.Id.buttonCheckout);
+            buttonCheckout.Click += ButtonCheckout_Click;
             return view;
+        }
+
+        private void ButtonCheckout_Click(object sender, EventArgs e)
+        {
+            if(mAdapter.mOrderList.Count == 0)
+            {
+                Toast.MakeText(this.Activity, "You have no items in cart!", ToastLength.Short);
+                return;
+            }
+
+            Intent i = new Intent(this.Activity, typeof(CheckOutFormActivity));
+            i.PutExtra("cartcount", this.Activity.Intent.GetStringExtra("cartcount"));
+            i.PutExtra("username", this.Activity.Intent.GetStringExtra("username"));
+            StartActivity(i);
         }
     }
 
