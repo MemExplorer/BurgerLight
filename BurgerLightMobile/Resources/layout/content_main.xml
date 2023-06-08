@@ -55,7 +55,7 @@
             android:orientation="vertical"
             android:gravity="center">
                 <ImageView
-                    android:src="@android:drawable/ic_menu_gallery"
+                    android:src="@drawable/burger"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:id="@+id/imageView2" />
@@ -67,17 +67,19 @@
             android:orientation="vertical"
             android:gravity="center">
             <TextView
-                android:text="Product Name"
+                android:text="Hamburger"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:gravity="center_vertical"/>
+                android:gravity="center_vertical"
+                android:id="@+id/textViewX"/>
             <TextView
-            android:text="Price"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center_vertical"/>
+                android:text="Php 69.00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center_vertical"
+                android:id="@+id/textViewY"/>
         </LinearLayout>
 
             
@@ -95,74 +97,74 @@
                 android:orientation="horizontal"
                 android:gravity="center">
 
-            <LinearLayout
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-                <ImageButton
-                    android:src="@android:drawable/ic_menu_gallery"
+                <LinearLayout
                     android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:id="@+id/imageButtonA" />
-                <TextView
-                    android:text="Product Name"
-                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:id="@+id/textViewA" />
+                    android:orientation="vertical">
+                    <ImageButton
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:background="@drawable/burger"
+                        android:id="@+id/imageButtonA" />
+                    <TextView
+                        android:text="Hamburger"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:id="@+id/textViewA" />
 
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-                <ImageButton
-                    android:src="@android:drawable/ic_menu_gallery"
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:id="@+id/imageButtonB" />
-                <TextView
-                    android:text="Product Name"
-                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:id="@+id/textViewB" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-                <ImageButton
-                    android:src="@android:drawable/ic_menu_gallery"
+                    android:orientation="vertical">
+                    <ImageButton
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:background="@drawable/burger"
+                        android:id="@+id/imageButtonB" />
+                    <TextView
+                        android:text="Chickenburger"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:id="@+id/textViewB" />
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:id="@+id/imageButtonC" />
-                <TextView
-                    android:text="Product Name"
-                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:id="@+id/textViewC" />
+                    android:orientation="vertical">
+                    <ImageButton
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:background="@drawable/burger"
+                        android:id="@+id/imageButtonC" />
+                    <TextView
+                        android:text="Borgir"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:id="@+id/textViewC" />
 
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-                <ImageButton
-                    android:src="@android:drawable/ic_menu_gallery"
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:id="@+id/imageButtonD" />
-                <TextView
-                    android:text="Product Name"
-                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:id="@+id/textViewD" />
+                    android:orientation="vertical">
+                    <ImageButton
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:background="@drawable/burger"
+                        android:id="@+id/imageButtonD" />
+                    <TextView
+                        android:text="BurgerLight Special"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:id="@+id/textViewD" />
 
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
         </HorizontalScrollView>
 
         
