@@ -14,7 +14,7 @@ namespace BurgerLightMobile.Fragments
         private ImageButton D;
         private TextView Name;
         private TextView Price;
-
+        private ImageView MainBurger;
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -32,6 +32,7 @@ namespace BurgerLightMobile.Fragments
             D = view.FindViewById<ImageButton>(Resource.Id.imageButtonD);
             Name = view.FindViewById<TextView>(Resource.Id.textViewX);
             Price = view.FindViewById<TextView>(Resource.Id.textViewY);
+            MainBurger = view.FindViewById<ImageView>(Resource.Id.imageView2);
 
             A.Click += ImageA_Click;
             B.Click += ImageB_Click;
@@ -46,24 +47,33 @@ namespace BurgerLightMobile.Fragments
         {
             Name.Text = "Hamburger";
             Price.Text = "Php 69.00";
+
+            MainBurger.SetImageResource(Resource.Drawable.hamburger);
+
         }
 
         private void ImageB_Click(object sender, EventArgs e)
         {
             Name.Text = "Chickenburger";
             Price.Text = "Php 79.00";
+            MainBurger.SetImageResource(Resource.Drawable.chickenburger);
+
         }
 
         private void ImageC_Click(object sender, EventArgs e)
         {
             Name.Text = "Borgir";
             Price.Text = "Php 99.00";
+            MainBurger.SetImageResource(Resource.Drawable.borgir);
+
         }
 
         private void ImageD_Click(object sender, EventArgs e)
         {
             Name.Text = "BurgerLight Special";
             Price.Text = "Php 199.00";
+            MainBurger.SetImageResource(Resource.Drawable.burgerlightspecial);
+
         }
     }
 }
