@@ -1,12 +1,8 @@
-﻿using System;
+﻿
 using Android.App;
 using Android.OS;
 using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using AndroidX.AppCompat.App;
-using AndroidX.Core.View;
-using AndroidX.DrawerLayout.Widget;
 
 namespace BurgerLightMobile
 {

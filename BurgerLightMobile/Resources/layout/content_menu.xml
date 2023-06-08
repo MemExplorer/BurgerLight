@@ -7,11 +7,19 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/app_bar_main"
-    android:layout_marginTop="50dp"
-    >
+    android:layout_marginTop="60dp"
+    >    
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Menu"
+            android:textColor="#FF4818"
+            android:textSize="30dp"
+         android:layout_marginLeft="30dp"/>
     <androidx.recyclerview.widget.RecyclerView
         android:minWidth="25px"
         android:minHeight="25px"
+        android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/recyclerView1"

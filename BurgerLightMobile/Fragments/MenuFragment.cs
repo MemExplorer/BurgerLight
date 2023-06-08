@@ -1,19 +1,13 @@
-﻿using Android.App;
+﻿
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
-using AndroidX.Fragment.App;
 using AndroidX.RecyclerView.Widget;
 using BurgerLightMobile.API;
 using BurgerLightMobile.API.Models;
-using Org.Apache.Http.Cookies;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BurgerLightMobile.Fragments

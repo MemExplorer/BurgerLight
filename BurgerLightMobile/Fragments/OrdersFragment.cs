@@ -2,11 +2,8 @@
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
-using AndroidX.Fragment.App;
 using AndroidX.RecyclerView.Widget;
 using BurgerLightMobile.Activities;
 using BurgerLightMobile.API;
@@ -15,9 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
-using static AndroidX.RecyclerView.Widget.RecyclerView;
 
 namespace BurgerLightMobile.Fragments
 {
@@ -235,6 +230,7 @@ namespace BurgerLightMobile.Fragments
             vh.PlusButton.Click += (s, e) => PlusButton_Click(s, e, u);
             vh.MinusButton.Click += (s, e) => MinusButton_Click(s, e, u);
             vh.DeleteButton.Click += (s, e) => DeleteButton_Click(s, e, u);
+
             DestroySubscribers(vh.PlusButton);
             DestroySubscribers(vh.MinusButton);
             DestroySubscribers(vh.DeleteButton);
