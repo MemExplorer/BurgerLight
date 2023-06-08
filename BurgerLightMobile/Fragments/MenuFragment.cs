@@ -145,7 +145,17 @@ namespace BurgerLightMobile.Fragments
 
             // Set the ImageView and TextView in this ViewHolder's CardView 
             // from this position in the Product List:
-            vh.Image.SetImageResource(Resource.Drawable.burger); //temo value
+
+            try
+            {
+                vh.Image.SetImageResource((int)typeof(Resource.Drawable).GetField(mProductList[position].name.ToLower().Replace(" ", "")).GetValue(null));
+            }
+            catch
+            {
+                vh.Image.SetImageResource(Resource.Drawable.burger); //temo value
+
+            }
+
             vh.Caption.Text = mProductList[position].name;
             vh.Price.Text = "P" + mProductList[position].price.ToString("n2");
             
