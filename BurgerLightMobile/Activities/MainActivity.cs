@@ -1,5 +1,6 @@
 ﻿using System;
 using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -17,6 +18,7 @@ namespace BurgerLightMobile
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar")]
     public class MainActivity : AppCompatActivity, NavigationView.IOnNavigationItemSelectedListener
     {
+        internal static MainActivity Instance;
         private Button LogoutBtn;
         private ImageButton CartBtn;
         public TextView CartCount;
@@ -48,6 +50,14 @@ namespace BurgerLightMobile
             View headerView = navigationView.GetHeaderView(0);
             usernameTxtView = headerView.FindViewById<TextView>(Resource.Id.usernameMain);
             usernameTxtView.Text = Intent.GetStringExtra("username");
+
+            SetTab(Resource.Id.nav_home);
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+            Instance = this;
         }
 
         private void CartBtn_Click(object sender, EventArgs e)
@@ -92,6 +102,28 @@ namespace BurgerLightMobile
             return base.OnOptionsItemSelected(item);
         }
 
+        internal void SetTab(int id)
+        {
+            NavigationView navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
+
+            switch (id)
+            {
+                case Resource.Id.nav_home:
+                    navigationView.Menu.GetItem(0).SetChecked(true);
+                    break;
+                case Resource.Id.nav_menu:
+                    navigationView.Menu.GetItem(1).SetChecked(true);
+                    break;
+                case Resource.Id.nav_orders:
+                    navigationView.Menu.GetItem(2).SetChecked(true);
+                    break;
+                default:
+                    throw new NotSupportedException();
+            }
+
+            SetContentFrame(id);
+        }
+
         private void SetContentFrame(int id)
         {
             Fragment f = null;
@@ -110,7 +142,7 @@ namespace BurgerLightMobile
                     throw new NotSupportedException();
             }
 
-            SupportFragmentManager.BeginTransaction().Replace(Resource.Id.content_frame, f).Commit();
+            SupportFragmentManager.BeginTransaction().Replace(Resource.Id.content_frame, f).CommitAllowingStateLoss();
         }
 
         public bool OnNavigationItemSelected(IMenuItem item)

@@ -22,15 +22,22 @@ namespace BurgerLightMobile.Activities
 
         }
 
+        public override void OnBackPressed()
+        {
+            base.OnBackPressed();
+            UpdateMainActivity();
+        }
+
+        private void UpdateMainActivity()
+        {
+            MainActivity.Instance.SetTab(Resource.Id.nav_home);
+            MainActivity.Instance.CartCount.Text = "0";
+        }
+
         protected void btnReturn_Click(object sender, EventArgs e)
         {
-            //Back to Main
-            Intent t = new Intent(this, typeof(MainActivity));
-            t.PutExtra("cartcount", "0");
-            t.PutExtra("username", this.Intent.GetStringExtra("username"));
-            StartActivity(t);
             Finish();
-
+            UpdateMainActivity();
         }
     }
 }

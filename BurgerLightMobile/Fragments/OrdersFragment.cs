@@ -106,10 +106,10 @@ namespace BurgerLightMobile.Fragments
             Intent i = new Intent(this.Activity, typeof(CheckOutFormActivity));
             i.PutExtra("cartcount", this.Activity.Intent.GetStringExtra("cartcount"));
             i.PutExtra("username", this.Activity.Intent.GetStringExtra("username"));
+            
             StartActivity(i);
         }
     }
-
 
     //----------------------------------------------------------------------
     // VIEW HOLDER

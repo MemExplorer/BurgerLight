@@ -19,7 +19,7 @@ namespace BurgerLightMobile.Activities
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
+            
             SetContentView(Resource.Layout.checkout_form_layout);
 
             //Get Session Here
@@ -46,7 +46,6 @@ namespace BurgerLightMobile.Activities
 
 
         }
-
 
         protected void btnCheckout_Click(object sender, EventArgs e)
         {
