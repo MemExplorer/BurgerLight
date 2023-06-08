@@ -1,15 +1,8 @@
-﻿
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Util;
+﻿using Android.OS;
 using Android.Views;
 using Android.Widget;
 using AndroidX.Fragment.App;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace BurgerLightMobile.Fragments
 {

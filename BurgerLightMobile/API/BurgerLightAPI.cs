@@ -1,26 +1,17 @@
-﻿using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+﻿
 using BurgerLightMobile.API.Models;
-using Java.Util;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
-using static Java.Util.Jar.Attributes;
 
 namespace BurgerLightMobile.API
 {
     internal class BurgerLightAPI
     {
-        const string domain = "http://192.168.239.251";
+        const string domain = "http://192.168.254.207";
         private static CookieContainer cookieContainer = new CookieContainer();
         private static APIResponse<RetType> GetResponse<RetType>(string strResponse)
         {
