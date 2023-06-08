@@ -9,7 +9,7 @@ include_once('../../utils.php');
 try {
 	if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 		if (isset($_SESSION['usersessionid'])) {
-			Response::CreateResponse(false, "User already logged In.");
+			Response::CreateResponse(false, "User already logged In.", null);
 			return;
 		}
 
@@ -48,17 +48,17 @@ try {
 					$q = 0;
 				// Successful login
 				$_SESSION['usersessionid'] = new LoginResponse($uid, $username, $q);
-				Response::CreateResponse(true, $_SESSION['usersessionid']);
+				Response::CreateResponse(true, "Success", $_SESSION['usersessionid']);
 			} else {
 				// Invalid password
-				Response::CreateResponse(false, "Invalid password.");
+				Response::CreateResponse(false, "Invalid password.", null);
 			}
 		} else {
 			// Invalid username
-			Response::CreateResponse(false, "Invalid username.");
+			Response::CreateResponse(false, "Invalid username.", null);
 		}
 	} else
-		Response::CreateResponse(false, "Invalid Request.");
+		Response::CreateResponse(false, "Invalid Request.", null);
 } finally {
 	$conn->close();
 }

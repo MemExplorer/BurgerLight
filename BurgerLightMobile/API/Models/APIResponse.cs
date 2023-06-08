@@ -1,26 +1,17 @@
-﻿using Newtonsoft.Json;
+﻿using Newtonsoft.Json.Linq;
 
 namespace BurgerLightMobile.API.Models
 {
     internal class APIResponse<ResType>
     {
         public bool success { get; set; }
-        public string response { get; set; }
+        public string message { get; set; }
+        public JContainer data { get; set; }
 
-        public ResType GetResponse()
-        {
-            if(success)
-                return JsonConvert.DeserializeObject<ResType>(response);
+        internal ResType GetResponse()
+            => data.ToObject<ResType>();
 
-            return default(ResType);
-        }
-
-        public string GetError()
-        {
-            if(!success)
-                return response;
-
-            return "";
-        }
+        internal string GetMessage() 
+            => message;
     }
 }

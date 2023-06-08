@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using BurgerLightMobile.API;
+using BurgerLightMobile.API.Models;
 using System;
 
 namespace BurgerLightMobile.Activities
@@ -46,7 +47,8 @@ namespace BurgerLightMobile.Activities
                 return;
             }
 
-            if(BurgerLightAPI.RegisterUser(usernameTxt.Text.ToLower(), passwordTxt.Text, out string eMsg))
+            APIResponse<string> r;
+            if (BurgerLightAPI.RegisterUser(usernameTxt.Text.ToLower(), passwordTxt.Text, out r))
             {
                 Toast.MakeText(this, "Successfully registered user!", ToastLength.Short).Show();
                 var intent = new Intent(this, typeof(LoginActivity));
@@ -56,7 +58,7 @@ namespace BurgerLightMobile.Activities
             }
 
 
-            Toast.MakeText(this, eMsg, ToastLength.Short).Show();
+            Toast.MakeText(this, r.GetMessage(), ToastLength.Short).Show();
         }
     }
 }

@@ -8,16 +8,16 @@ include_once('../utils.php');
 try {
 
     if (!isset($_SESSION['usersessionid'])) {
-        Response::CreateResponse(false, "Session not found!");
+        Response::CreateResponse(false, "Session not found!", null);
         return;
     }
 
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
         $lname = $_GET['lname'];
-        $fname  = $_GET['fname'];
-        $email  = $_GET['email'];
-        $tel  = $_GET['tel'];
+        $fname = $_GET['fname'];
+        $email = $_GET['email'];
+        $tel = $_GET['tel'];
 
         $street = $_GET['street'];
         $city = $_GET['city'];
@@ -29,10 +29,10 @@ try {
 
         if (mysqli_multi_query($conn, $query)) {
             // Success
-            Response::CreateResponse(true, "Success");
+            Response::CreateResponse(true, "Success", "Success");
         } else {
             // Error
-            Response::CreateResponse(false, "Failed to process order!");
+            Response::CreateResponse(false, "Failed to process order!", null);
         }
     }
 } finally {

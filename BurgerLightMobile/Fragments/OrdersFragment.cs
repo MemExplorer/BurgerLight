@@ -43,8 +43,7 @@ namespace BurgerLightMobile.Fragments
             await Task.Run(() => {
 
                 this.Activity.RunOnUiThread(() => {
-                    mOrderList = BurgerLightAPI.FetchOrders(out string eMsg);
-                    if (mOrderList == null)
+                    if (!BurgerLightAPI.FetchOrders(out APIResponse<List<OrderResponse>> r))
                     {
                         //Set to default values
                         Activity act = (Activity)this.Activity;
@@ -60,6 +59,7 @@ namespace BurgerLightMobile.Fragments
                         return;
                     }
 
+                    mOrderList = r.GetResponse();
                     mAdapter.mOrderList = mOrderList.ToDictionary(x => x.id);
                     mAdapter.NotifyDataSetChanged();
 
@@ -276,21 +276,23 @@ namespace BurgerLightMobile.Fragments
 
         private void APIUpdateCart(int val, OrderUIUpdater u)
         {
-            AddCartResponse resp = BurgerLightAPI.AddCart(u.OrderResponse.id, val, out string eMsg);
-            if(resp != null)
+            if(!BurgerLightAPI.AddCart(u.OrderResponse.id, val, out APIResponse<AddCartResponse> r))
             {
-                u.QuantityTextView.Text = resp.newvalue.ToString();
-                mOrderList[u.OrderResponse.id].quantity = resp.newvalue;
-                UpdateOrderUI(u);
-
-                if(resp.newvalue == 0)
-                {
-                    mOrderList.Remove(u.OrderResponse.id);
-                    this.NotifyDataSetChanged();
-                }
+                Toast.MakeText(this.AppCtx, r.GetMessage(), ToastLength.Short).Show();
+                return;
             }
-            else
-                Toast.MakeText(this.AppCtx, eMsg, ToastLength.Short).Show();
+
+            AddCartResponse resp = r.GetResponse();
+            u.QuantityTextView.Text = resp.newvalue.ToString();
+            mOrderList[u.OrderResponse.id].quantity = resp.newvalue;
+            UpdateOrderUI(u);
+
+            if (resp.newvalue == 0)
+            {
+                mOrderList.Remove(u.OrderResponse.id);
+                this.NotifyDataSetChanged();
+            }
+
         }
 
         private void UpdateOrderUI(OrderUIUpdater u)

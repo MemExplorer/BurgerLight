@@ -8,7 +8,7 @@ include_once('../utils.php');
 try {
 
     if (!isset($_SESSION['usersessionid'])) {
-        Response::CreateResponse(false, "Session not found!");
+        Response::CreateResponse(false, "Session not found!", null);
         return;
     }
 
@@ -27,9 +27,10 @@ try {
             $menulist[] = $menuitem;
         }
 
-        Response::CreateResponse(true, $menulist);
-    } else
-        Response::CreateResponse(false, "Failed to fetch the menu!");
+
+    }
+
+    Response::CreateResponse(true, "Success", $menulist);
 
 } finally {
     $conn->close();

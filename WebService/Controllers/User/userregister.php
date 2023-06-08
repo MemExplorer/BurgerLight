@@ -15,7 +15,7 @@ try {
 
         // Check if the user exists
         if ($result->num_rows > 0) {
-            Response::CreateResponse(false, "Username already exists!");
+            Response::CreateResponse(false, "Username already exists!", null);
             return;
         } else {
             $saltVal = Utils::GenerateRandomString(150);
@@ -26,12 +26,12 @@ try {
 
             $result = $stmt->execute();
             if ($result)
-                Response::CreateResponse(true, "Successfully created account!");
+                Response::CreateResponse(true, "Successfully created account!", "Successfully created account!");
             else
-                Response::CreateResponse(false, "Failed to Create Account!");
+                Response::CreateResponse(false, "Failed to Create Account!", null);
         }
     } else
-        Response::CreateResponse(false, "Invalid Request!");
+        Response::CreateResponse(false, "Invalid Request!", null);
 
 } finally {
     $conn->close();

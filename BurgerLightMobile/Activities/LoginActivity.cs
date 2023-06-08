@@ -77,21 +77,24 @@ namespace BurgerLightMobile.Activities
 
         private void LoginBtn_Click(object sender, EventArgs e)
         {
-            LoginResponse r = BurgerLightAPI.LoginUser(usernameText.Text.ToLower(), passwordEditText.Text, out string eMsg);
-            if (r != null)
+            if (!BurgerLightAPI.LoginUser(usernameText.Text.ToLower(), passwordEditText.Text, out APIResponse<LoginResponse> r1))
             {
-                //start main app
-                usernameText.Text = string.Empty;
-                passwordEditText.Text = string.Empty;
-                loggedIn = true;
-                Intent t = new Intent(this, typeof(MainActivity));
-                t.PutExtra("cartcount", r.carttotal.ToString());
-                t.PutExtra("username", r.username.ToLower());
-                StartActivity(t);
+                Toast.MakeText(this, r1.GetMessage(), ToastLength.Short).Show();
                 return;
             }
 
-            Toast.MakeText(this, eMsg, ToastLength.Short).Show();
+            LoginResponse r  = r1.GetResponse();
+            //start main app
+            usernameText.Text = string.Empty;
+            passwordEditText.Text = string.Empty;
+            loggedIn = true;
+            Intent t = new Intent(this, typeof(MainActivity));
+            t.PutExtra("cartcount", r.carttotal.ToString());
+            t.PutExtra("username", r.username.ToLower());
+            StartActivity(t);
+            return;
+
+
         }
     }
 }
