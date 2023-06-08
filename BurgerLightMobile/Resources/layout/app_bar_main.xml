@@ -10,12 +10,46 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-        <androidx.appcompat.widget.Toolbar
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+                    <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="#FF4818"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+        <FrameLayout
+        android:id="@+id/CartFrame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_alignParentEnd="true">
+
+            <ImageButton
+            android:id="@+id/CartBtn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/shopping_cart"
+                android:background="@android:color/transparent"
+                android:layout_marginTop="7dp"/>
+            <TextView
+                android:id="@+id/CartItemCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="32dp"
+                android:text="0"/>
+
+    </FrameLayout>
+        </RelativeLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 

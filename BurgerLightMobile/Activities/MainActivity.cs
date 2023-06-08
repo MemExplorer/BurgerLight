@@ -18,14 +18,15 @@ namespace BurgerLightMobile
     public class MainActivity : AppCompatActivity, NavigationView.IOnNavigationItemSelectedListener
     {
         private Button LogoutBtn;
-
+        private ImageButton CartBtn;
+        public TextView CartCount;
+        public TextView usernameTxtView;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.activity_main);
             Toolbar toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
-            SetSupportActionBar(toolbar);
 
             DrawerLayout drawer = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
             ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, Resource.String.navigation_drawer_open, Resource.String.navigation_drawer_close);
@@ -38,8 +39,23 @@ namespace BurgerLightMobile
 
             LogoutBtn = FindViewById<Button>(Resource.Id.logoutBtn);
             LogoutBtn.Click += LogoutBtn_Click;
+
+            CartBtn = FindViewById<ImageButton>(Resource.Id.CartBtn);
+            CartBtn.Click += CartBtn_Click;
+            CartCount = FindViewById<TextView>(Resource.Id.CartItemCount);
+            CartCount.Text = Intent.GetStringExtra("cartcount");
+
+            View headerView = navigationView.GetHeaderView(0);
+            usernameTxtView = headerView.FindViewById<TextView>(Resource.Id.usernameMain);
+            usernameTxtView.Text = Intent.GetStringExtra("username");
         }
 
+        private void CartBtn_Click(object sender, EventArgs e)
+        {
+            NavigationView navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
+            navigationView.Menu.GetItem(2).SetChecked(true);
+            SetContentFrame(Resource.Id.nav_orders);
+        }
 
         private void LogoutBtn_Click(object sender, EventArgs e)
         {

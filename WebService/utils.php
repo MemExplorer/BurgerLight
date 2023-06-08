@@ -17,6 +17,17 @@ class Utils
     {
         return hash('MD5', $_SERVER['REMOTE_ADDR'] . $userId);
     }
+
+    public static function FixSessionObject($object)
+    {
+        return json_decode(json_encode(get_object_vars($object)), true);
+    }
+
+    public static function ValidateInt($number)
+    {
+        $number = filter_var($number, FILTER_VALIDATE_INT);
+        return ($number !== FALSE);
+    }
 }
 
 ?>

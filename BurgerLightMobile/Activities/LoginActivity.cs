@@ -6,6 +6,8 @@ using Android.Text;
 using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
+using BurgerLightMobile.API;
+using BurgerLightMobile.API.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,19 +15,25 @@ using System.Text;
 
 namespace BurgerLightMobile.Activities
 {
-    [Activity(Label = "Login", Theme = "@style/LoginTheme", MainLauncher = true)]
+    [Activity(Label = "Login", Theme = "@style/LoginTheme")]
     public class LoginActivity : AppCompatActivity
     {
+        private bool loggedIn;
         private ImageButton passwordVisibilityBtn;
         private EditText passwordEditText;
         private Button loginBtn;
+        private Button backBtn;
+        private EditText usernameText;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.login_layout);
 
+            loggedIn = false;
             //initialize controls
+            usernameText = FindViewById<EditText>(Resource.Id.loginUsername);
+
             loginBtn = FindViewById<Button>(Resource.Id.LoginBtn);
             loginBtn.Click += LoginBtn_Click;
 
@@ -33,6 +41,25 @@ namespace BurgerLightMobile.Activities
             passwordVisibilityBtn.Click += PasswordVisibilityBtn_Click;
 
             passwordEditText = FindViewById<EditText>(Resource.Id.loginPassword);
+            backBtn = FindViewById<Button>(Resource.Id.BackBtnLogin);
+            backBtn.Click += BackBtn_Click;
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+            //logout user if user pressed back btn
+            if (loggedIn)
+            {
+                loggedIn = false;
+                BurgerLightAPI.LogoutUser(out _);
+            }
+        }
+
+        private void BackBtn_Click(object sender, EventArgs e)
+        {
+            Finish();
         }
 
         private void PasswordVisibilityBtn_Click(object sender, EventArgs e)
@@ -55,11 +82,21 @@ namespace BurgerLightMobile.Activities
 
         private void LoginBtn_Click(object sender, EventArgs e)
         {
-            //TODO: Check credentials from server
+            LoginResponse r = BurgerLightAPI.LoginUser(usernameText.Text.ToLower(), passwordEditText.Text, out string eMsg);
+            if (r != null)
+            {
+                //start main app
+                usernameText.Text = string.Empty;
+                passwordEditText.Text = string.Empty;
+                loggedIn = true;
+                Intent t = new Intent(this, typeof(MainActivity));
+                t.PutExtra("cartcount", r.carttotal.ToString());
+                t.PutExtra("username", r.username.ToLower());
+                StartActivity(t);
+                return;
+            }
 
-            //start main app
-            Intent t = new Intent(this, typeof(MainActivity));
-            StartActivity(t);
+            Toast.MakeText(this, eMsg, ToastLength.Short).Show();
         }
     }
 }
