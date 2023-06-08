@@ -6,10 +6,15 @@ namespace BurgerLightMobile.API.Models
     {
         public bool success { get; set; }
         public string message { get; set; }
-        public JContainer data { get; set; }
+        public object data { get; set; }
 
         internal ResType GetResponse()
-            => data.ToObject<ResType>();
+        {
+            if (data is JContainer c)
+                return c.ToObject<ResType>();
+            else
+                return (ResType)data;
+        }
 
         internal string GetMessage() 
             => message;

@@ -26,9 +26,11 @@ try {
             //append data to orderlist
             $orderlist[] = $orderitem;
         }
-    }
+        Response::CreateResponse(true, "Success", $orderlist);
+    } else
+        Response::CreateResponse(false, "No items in cart.", $orderlist);
 
-    Response::CreateResponse(true, "Success", $orderlist);
+
 
 } finally {
     $conn->close();

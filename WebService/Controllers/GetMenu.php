@@ -27,10 +27,11 @@ try {
             $menulist[] = $menuitem;
         }
 
+        Response::CreateResponse(true, "Success", $menulist);
+    } else
+        Response::CreateResponse(false, "No items in menu.", $menulist);
 
-    }
 
-    Response::CreateResponse(true, "Success", $menulist);
 
 } finally {
     $conn->close();
