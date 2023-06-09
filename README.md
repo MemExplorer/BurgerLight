@@ -1,4 +1,4 @@
-# Kawaii Dash
+# BurgerLight
 
 BurgerLight is a mobile application that allows you to order food online. With BurgerLight, you can browse menus, view photos of food items, and place orders for pickup or delivery. You can also save your favorite Burgers and Sides for easy ordering in the future. Every transaction and Data Fetching relies on Restful API.
 
