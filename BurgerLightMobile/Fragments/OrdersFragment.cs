@@ -218,12 +218,12 @@ namespace BurgerLightMobile.Fragments
             // from this position in the Product List:
             try
             {
-                vh.Image.SetImageResource(Resource.Drawable.burger);
+                vh.Image.SetImageResource((int)typeof(Resource.Drawable).GetField(currOrderResp.name.ToLower().Replace(" ", "")).GetValue(null));
             }
             catch
             {
-                //set default photo
-                vh.Image.SetImageResource(Resource.Drawable.burger);
+                vh.Image.SetImageResource(Resource.Drawable.burger); //temo value
+
             }
 
             ///////////SET OnClick of Button in Recycler View HERE

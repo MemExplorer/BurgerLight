@@ -49,40 +49,41 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:orientation="horizontal">
-        <LinearLayout
-            android:layout_width="200dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center">
+            <LinearLayout
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center">
                 <ImageView
                     android:src="@drawable/burger"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
-                    android:id="@+id/imageView2" />
-         </LinearLayout>
+                    android:id="@+id/imageView2"
+                    android:scaleType="centerInside"/>
+            </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="200dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center">
-            <TextView
-                android:text="Hamburger"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_vertical"
-                android:id="@+id/textViewX"/>
-            <TextView
-                android:text="Php 69.00"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_vertical"
-                android:id="@+id/textViewY"/>
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center">
+                <TextView
+                    android:text="Hamburger"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_vertical"
+                    android:id="@+id/textViewX"/>
+                <TextView
+                    android:text="Php 69.00"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_vertical"
+                    android:id="@+id/textViewY"/>
+            </LinearLayout>
 
-            
+
 
 
         </LinearLayout>
@@ -105,7 +106,8 @@
                         android:layout_width="150dp"
                         android:layout_height="150dp"
                         android:background="@drawable/burger"
-                        android:id="@+id/imageButtonA" />
+                        android:id="@+id/imageButtonA"
+                        />
                     <TextView
                         android:text="Hamburger"
                         android:layout_width="match_parent"
@@ -121,8 +123,9 @@
                     <ImageButton
                         android:layout_width="150dp"
                         android:layout_height="150dp"
-                        android:background="@drawable/burger"
-                        android:id="@+id/imageButtonB" />
+                        android:background="@drawable/chickenburger"
+                        android:id="@+id/imageButtonB"
+                        />
                     <TextView
                         android:text="Chickenburger"
                         android:layout_width="match_parent"
@@ -137,8 +140,9 @@
                     <ImageButton
                         android:layout_width="150dp"
                         android:layout_height="150dp"
-                        android:background="@drawable/burger"
-                        android:id="@+id/imageButtonC" />
+                        android:background="@drawable/borgir"
+                        android:id="@+id/imageButtonC"
+                        />
                     <TextView
                         android:text="Borgir"
                         android:layout_width="match_parent"
@@ -154,8 +158,9 @@
                     <ImageButton
                         android:layout_width="150dp"
                         android:layout_height="150dp"
-                        android:background="@drawable/burger"
-                        android:id="@+id/imageButtonD" />
+                        android:background="@drawable/burgerlightspecial"
+                        android:id="@+id/imageButtonD"
+                        />
                     <TextView
                         android:text="BurgerLight Special"
                         android:layout_width="match_parent"
@@ -167,7 +172,7 @@
             </LinearLayout>
         </HorizontalScrollView>
 
-        
+
     </LinearLayout>
 
 </RelativeLayout>
