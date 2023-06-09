@@ -7,7 +7,7 @@ BurgerLight is a mobile application that allows you to order food online. With B
 ![](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmE3ZWM5NzU1YTUwOTcwYzFhNjUzMzI2Zjg1NzMzYzA3MTExY2RlYSZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/MbZ9FYyKXtSZlzSJYP/giphy.gif)
 ## Run Locally
 
-Change IP Address in BurgerLightAPI
+Change IP Address in BurgerLightAPI to your local IP
 
 ```bash
   const string domain = "http://127.0.0.1";
