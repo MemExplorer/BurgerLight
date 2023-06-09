@@ -11,7 +11,7 @@ namespace BurgerLightMobile.API
 {
     internal class BurgerLightAPI
     {
-        const string domain = "http://172.23.112.1";
+        const string domain = "http://192.168.254.207";
         private static CookieContainer cookieContainer = new CookieContainer();
         private static APIResponse<RetType> CreateAPIRequest<RetType>(string path, Dictionary<string, string> paramList = null)
         {
